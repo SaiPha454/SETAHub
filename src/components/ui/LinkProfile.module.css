@@ -1,0 +1,29 @@
+.profile {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #6B6868;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileImg {
+    width: 75%;
+    height: 75%;
+}
+
+@media only screen and (min-width: 768px) {
+    .profile {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .profile {
+        width: 39px;
+        height: 39px;
+    }
+}
+

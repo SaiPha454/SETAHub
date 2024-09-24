@@ -1,0 +1,16 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.layoutContainer {
+    margin-top: 0;
+    width: 100%;
+    /* margin: 16px; */
+    
+}
+
+.layoutContent {
+    width: 100%;
+}

@@ -1,0 +1,27 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.layoutContainer {
+    margin-top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 16px;
+    padding-right: 16px;
+    /* height: 100vh; */
+    /* margin: 16px; */
+    
+}
+
+.layoutContent {
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .layoutContainer{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}

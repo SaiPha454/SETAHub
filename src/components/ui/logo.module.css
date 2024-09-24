@@ -1,0 +1,33 @@
+.logo {
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 24px;
+    display: inline-block;
+    color: #0056d2;
+    font-weight: 900;
+}
+
+@media only screen and (min-width: 576px) {
+    .container {
+        max-width: 540px; /* Adjusted to be suitable for this size */
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .container {
+        max-width: 960px; /* Increased to match larger screen widths */
+    }
+    .logo {
+        font-size: 32px;
+    }
+}

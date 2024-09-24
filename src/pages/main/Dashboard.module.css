@@ -1,0 +1,10 @@
+.dashboard {
+    padding-top: 56px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 24px;
+}

@@ -1,0 +1,23 @@
+.contactIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.text {
+    font-weight: 700;
+    color: rgba(0, 0, 0,0.75);
+    margin-left: 16px;
+}
+
+.contactContainer{
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .text {
+        color: black;
+    }
+}

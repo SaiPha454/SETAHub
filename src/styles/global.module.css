@@ -1,0 +1,23 @@
+:root {
+    --primary-color: #0056d2;
+}
+
+.container {
+    /* Container of the page content */
+    max-width: 100%;
+    margin: auto;
+    margin-top: 0;
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .container {
+        max-width: 960px; /* Increased to match larger screen widths */
+    }
+}

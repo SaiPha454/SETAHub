@@ -1,0 +1,100 @@
+.titleImg{
+    width: 48px;
+    height: 48px;
+}
+
+.appointment {
+
+    box-sizing: border-box;
+    display: flex;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 21px;
+    width: 100%;
+}
+
+.content {
+    display: flex;
+    gap: 0.5em;
+    margin-left: 16px;
+    width: 100%;
+    flex-direction: column;
+}
+
+.content h4 {
+    margin-top: 0;
+}
+
+.profile {
+    width: 21px;
+    height: 21px;
+}
+
+.taContent {
+    font-size: 11px;
+    display: flex;
+    gap: 11px;
+    align-items: center;
+}
+
+.taContent span {
+    margin-left: 11px;
+}
+
+.dateTime {
+    font-size: 11px;
+}
+
+.dateTime .time {
+    margin-left: 10px;
+}
+
+.titleContainer {
+    flex: 1;
+}
+
+.dateTimeContainer {
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 110px;
+    align-items: start;
+    margin-top: 24px;
+}
+
+.statusContainer {
+    padding-top: 25px;
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+}
+
+@media only screen and (min-width: 768px) {
+    .appointment {
+        width: 85%;
+    }
+    .content {
+        flex-direction: row;
+        gap: 3.5em;
+    }
+
+    .dateTimeContainer {
+        margin-top: 0;
+        justify-content: space-between;
+    }
+    .dateTime {
+        font-size: 13px;
+    }
+    .taContent {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+
+    .appointment {
+        width: 75%;
+    }
+}

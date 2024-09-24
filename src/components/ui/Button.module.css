@@ -1,0 +1,32 @@
+.joinUs {
+    display: inline-block;
+}
+
+.button {
+    
+    display: inline-flex;
+    justify-content: center; /* Horizontally centers the text */
+    align-items: center;     /* Vertically centers the text */
+    width: 72px;
+    /* width: auto; */
+    padding: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-radius: 6px;
+    background-color: #0056d2;
+    /* overflow: hidden; */
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    font-weight: lighter;
+    /* font-family: Inter, sans-serif; */
+}
+
+@media only screen and (min-width: 768px) {
+    .joinUs {
+        font-size: 16px;
+    }
+    /* .button {
+        width: 86px;
+    } */
+}

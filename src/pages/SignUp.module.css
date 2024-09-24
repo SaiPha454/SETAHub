@@ -1,0 +1,50 @@
+.signupPage{
+
+}
+
+.formContainer {
+    padding: 16px;
+    padding-top: 48px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.formContainer h3 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.formContent {
+    padding-top: 28px;
+    text-align: center;
+    box-sizing: border-box;
+    width: 90%;
+    
+}
+
+.formContent div {
+    padding-bottom: 8px;
+}
+
+.toLoginText {
+    font-size: 12px;
+    color:  gray;
+    /* margin-top: 16px; */
+}
+@media only screen and (min-width: 768px) {
+    .formContent {
+        width: 65%;
+    }
+    .formContent div {
+        padding-bottom: 14px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .formContent {
+        width: 45%;
+    }
+}
