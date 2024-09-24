@@ -20,7 +20,7 @@ export default function Home() {
       </div>
 
       <div>
-        <h1>Ninn Components</h1>
+        <h4>Ninn Component</h4>
         {/* Ninn Code here */}
       </div>
       <div>
