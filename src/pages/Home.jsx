@@ -24,7 +24,7 @@ export default function Home() {
         {/* Ninn Code here */}
       </div>
       <div>
-        <h1>Eaint Eaint Components</h1>
+        <h1>Eaint Components</h1>
         {/* Eaint's Code here */}
       </div>
     </div>
