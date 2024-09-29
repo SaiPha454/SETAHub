@@ -9,6 +9,7 @@
     flex-direction: column;
     padding-top: 8px;
 }
+
 .homeCoverImg{
     text-align: center;
     width: 100%;
@@ -36,6 +37,45 @@
 .welcomeText span {
     color: var(--primary-color);
 }
+
+.guideText {
+    text-align: center;
+    font-size: 15px;
+}
+
+.subject{
+    margin-bottom: 120px;
+}
+
+.photoGp {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.photoContainer {
+    height: 120px;
+    width: 96px;
+    box-shadow: 0px 4px 4px 4px rgba(58, 55, 55, 0.25);
+    margin: 10px;
+    margin-bottom: 30px;
+    max-width: 250px;
+    display: inline-block;
+    background-color: #fbfbfb;
+    align-content: center;
+    padding: 20px;
+    overflow: hidden;
+    border-radius: 5px;
+    text-align: center;
+    transition: transform 0.5s;
+}
+
+.photoContainer:hover{
+    transform: scale(1.2);
+}
+
+
+/* ipad */
 @media only screen and (min-width: 768px) {
     .homeCover {
         flex-direction: row;
@@ -58,8 +98,14 @@
         font-size: 16px;
         margin-bottom: 48px;
     }
+    .guideText {
+        font-size: 21px;
+    }
+    
+
 }
 
+/* Laptops */
 @media only screen and (min-width: 960px) {
     .welcomeText {
         font-size: 32px;
@@ -67,4 +113,12 @@
     .homeCoverText p {
         font-size: 17px;
     }
+    .guideText {
+        font-size: 24px;
+    }
+    .photoContainer {
+        width: 145px;
+        height: 145px;
+    }
+
 }

@@ -13,6 +13,7 @@ import AvailableTAS from "./pages/main/AvailableTAS"
 import Appointment from "./pages/main/Appointment"
 import Bookings from "./pages/main/Bookings"
 import Profile from "./pages/main/Profile"
+import MyTASessions from "./pages/main/MyTASessions"
 
 export default function appRouter() {
 
@@ -64,8 +65,8 @@ export default function appRouter() {
           element: <Bookings/>
         },
         {
-          path:"ta-sessions",
-          element: <h1>My TA Session</h1>
+          path:"tasessions",
+          element: <MyTASessions/>
         },
         {
           path:"profile",
