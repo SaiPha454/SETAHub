@@ -75,7 +75,7 @@ export default function UpcomingBooking() {
                 name={booking.mentor.name}
                 title={booking.title} >
                     <CancelButton text="cancel" color='#E33B3B' />
-                    <MessageButton text="Message" url="" />
+                    <MessageButton text="Message" url={`/me/chat/${booking.mentor.id}`} />
 
                 </Appointment>
             })

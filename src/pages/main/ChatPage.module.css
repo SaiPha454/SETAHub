@@ -1,0 +1,29 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.chatPageContent{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    
+}
+
+.chatFooter{
+    height: 50px ;
+    position: fixed;
+}
+
+.messagesContainer {
+    height: 100%;
+    overflow-y: scroll;
+    padding-bottom: 62px;
+    box-sizing: border-box;
+    padding-top: 21px;
+    padding-right: 21px;
+    padding-left: 21px;
+    
+}

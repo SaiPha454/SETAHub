@@ -19,6 +19,7 @@ const Navbar = () => {
                                 <Link className={styles.navLink} to="/me/tasessions">My TA Sessions</Link>
                             </div>
                             <LinkProfile img={ProfileIcon} url="/me/profile" />
+                            
                         </div>
                     </div>
                 </div>

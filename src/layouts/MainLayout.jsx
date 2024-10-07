@@ -24,6 +24,7 @@ export default function AuthLayout() {
           <FooterLink text='My Bookings' url='/me/bookings' />
           <FooterLink text='My TA Session' url='/me/tasessions' />
           <FooterLink text='My  Profile' url='/me/profile' />
+          <FooterLink text='Message' url='/me/chat/123456'/>
       </Footer>
     </div>
   )

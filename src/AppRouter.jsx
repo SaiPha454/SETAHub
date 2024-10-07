@@ -14,6 +14,7 @@ import Appointment from "./pages/main/Appointment"
 import Bookings from "./pages/main/Bookings"
 import Profile from "./pages/main/Profile"
 import MyTASessions from "./pages/main/MyTASessions"
+import ChatPage from "./pages/main/ChatPage"
 
 export default function appRouter() {
 
@@ -71,9 +72,14 @@ export default function appRouter() {
         {
           path:"profile",
           element: <Profile/>
-        }
+        },
       ]
+    },
+    {
+      path: "/me/chat/:userId",
+      element: <ChatPage/>
     }
+
   ])
 
   return <RouterProvider router={router} />
