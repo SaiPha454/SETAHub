@@ -2,12 +2,14 @@
     padding-top: 32px;
     padding-left: 16px;
     padding-right: 16px;
+    font-family: 'Inter', sans-serif;
 }
 
 .homeCover {
     display: flex;
     flex-direction: column;
     padding-top: 8px;
+    justify-content: center;
 }
 
 .homeCoverImg{
@@ -25,32 +27,88 @@
     flex: 1;
 }
 
-.homeCoverText p {
+/* .homeCoverText p {
     font-weight: bold;
     font-size: 14px;
-}
+} */
 
 .welcomeText {
+    display: flex;
+    justify-content: left;
     font-size: 24px;
     font-weight: bolder;
 }
+
 .welcomeText span {
     color: var(--primary-color);
 }
 
+/* Ninn css */
+.meetText{
+    /* text-align: left; */
+    font-size: 15px;
+}
+.text{
+    font-style: italic;
+    font-weight: normal;
+    width: 280px;
+    height: 80px;
+}
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+.button1{
+    padding-right: 20px;
+}
+
+.homewrapper {
+    width: 100vw;
+    background-color: #0056d2;
+    margin-top: 5rem;
+    position: relative;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    left: 50%;
+    right: 50%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.homewrapper1 {
+    width: 100vw;
+    background-color: #f7f4f1;
+    margin-top: 5rem;
+    position: relative;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    left: 50%;
+    right: 50%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+/* Eaint Css */
+
 .guideText {
     text-align: center;
-    font-size: 15px;
+    font-size: 17px;
+    margin-bottom: 3rem;
 }
 
 .subject{
-    margin-bottom: 120px;
+    padding-top: 2rem;
 }
+
 
 .photoGp {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.plogo {
+    color: var(--primary-color);
 }
 
 .photoContainer {
@@ -91,17 +149,41 @@
     .homeCoverImg img{
         width: 100% !important;
     }
+
     .welcomeText {
-        font-size: 28px;
+        font-size: 25px;
+        margin: 0;
+        padding: 0;
     }
-    .homeCoverText p {
+
+    /* .homeCoverText p {
         font-size: 16px;
         margin-bottom: 48px;
+    } */
+
+    /* Ninn Css */
+    .meetText {
+        font-size: 15px;
+        /* margin-top: 0; */
     }
+    .text{
+        width: 260px;
+        height: 70px;
+    }
+    .buttons{
+        font-size: 10px;
+    }
+
+    .homeBackground {
+        max-width: 768px;
+        margin: 0 auto;
+
+    }
+
+    /* Eaint Css */
     .guideText {
-        font-size: 21px;
+        font-size: 24px;
     }
-    
 
 }
 
@@ -110,11 +192,23 @@
     .welcomeText {
         font-size: 32px;
     }
-    .homeCoverText p {
+    /* .homeCoverText p {
         font-size: 17px;
+    } */
+
+    /* Nin Css */
+    .meetText {
+        font-size: 15px;
     }
+    .text{
+        width: 260px;
+        font-size: 15px;
+        height: 120px;
+    }
+
+    /* Eaint Css */
     .guideText {
-        font-size: 24px;
+        font-size: 27px;
     }
     .photoContainer {
         width: 145px;

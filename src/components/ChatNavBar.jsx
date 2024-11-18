@@ -4,6 +4,7 @@ import Logo from './ui/Logo'
 import Profile from '../pages/main/Profile'
 import { useNavigate } from 'react-router-dom'; //to backpage
 import LinkProfile from './ui/LinkProfile';
+import backIcon from "../assets/backicon.svg"
 
 
 
@@ -22,7 +23,7 @@ const ChatNavBar = ({img = null, name}) => {
                 <div className={`${styles.navbarContent}`}>
                     <div className={`${styles.rightSide}`}>
                          <button className={`${styles.backBtn}`} onClick={goBack}>
-                            &lt;
+                            <img src={backIcon} className={`${styles.backBtn}`} />
                         </button>
                         <Logo url="/me/" />
                     </div>

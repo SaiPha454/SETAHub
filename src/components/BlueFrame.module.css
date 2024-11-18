@@ -1,0 +1,89 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+}
+
+.frameDiv {
+    width: 100%;
+    padding: 80px 20px;
+    /* border-radius: 13px; */
+    /* background: linear-gradient(90deg, #0056d2, #0066ff, #0041a8); */
+    /* background: linear-gradient(90deg, #0056d2, #4d7cc1, #0041a8); */
+    background-color: #0056d2;
+    /* border: 2px solid #acacac; */
+    /* box-sizing: border-box; */
+    text-align: center;
+    /* position: relative; */
+}
+
+.areYouA {
+    font-size: 27px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 20px;
+} 
+
+.helpUsBuild {
+    font-size: 17px;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 40px;
+}
+
+.registerParent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 50px;
+    margin: 0 auto;
+    background-color: #0056d2;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.registerParent {
+    border: 1px solid #A2A2A2;
+    background-color: #0041a8; /* Darker blue on hover */
+}
+
+.register {
+    font-weight: normal;
+    width: 83px;
+    position: relative;
+    font-size: 17px;
+    display: inline-block;
+    font-family: Inter;
+    color: #fff;
+    text-align: left;
+} 
+
+.arrowIcon {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+@media (min-width: 768px) {
+    .frameDiv {
+        /* border-radius: 18px; */
+    }
+    .areYouA {
+        font-size: 32px;
+    } 
+    .helpUsBuild {
+        font-size: 27px;
+    }
+    .register {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 960px) {
+    .frameDiv {
+        /* border-radius: 18px; */
+    }
+}

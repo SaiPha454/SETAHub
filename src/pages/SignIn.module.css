@@ -1,0 +1,79 @@
+.signinPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    font-family: Inter;
+}
+  
+.formContainer {
+padding: 16px;
+padding-top: 48px;
+width: 100%;
+box-sizing: border-box;
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.formContainer h3 {
+font-size: 24px;
+font-weight: bold;
+text-align: center;
+margin-bottom: 20px;
+}
+
+.formContent {
+padding-top: 28px;
+text-align: center;
+box-sizing: border-box;
+width: 90%;
+}
+
+.formContent div {
+padding-bottom: 8px;
+}
+
+.submitError {
+color: #dc2626;
+font-size: 14px;
+margin-bottom: 16px;
+text-align: left;
+}
+
+.forgotPassword {
+color: #4b5563;
+text-decoration: none;
+font-size: 14px;
+transition: color 0.2s ease;
+}
+
+.forgotPassword:hover {
+color: #1f2937;
+}
+
+/* Assuming your FormInput component accepts an error prop for styling */
+.inputError {
+border-color: #dc2626;
+}
+
+.errorMessage {
+color: #dc2626;
+font-size: 12px;
+margin-top: 4px;
+text-align: left;
+}
+
+@media only screen and (min-width: 768px) {
+.formContent {
+    width: 65%;
+}
+.formContent div {
+    padding-bottom: 14px;
+}
+}
+
+@media only screen and (min-width: 960px) {
+.formContent {
+    width: 45%;
+}
+}

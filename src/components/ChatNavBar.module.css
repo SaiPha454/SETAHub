@@ -17,15 +17,14 @@
 }
 
 .backBtn {
-    font-size: 35px;
+    width: 20px;
+    height: 20px;
     margin-right: 20px;
-    color: black;
     border: none; /* No border */
     background: none; /* Remove background */
     cursor: pointer; /* Change cursor to pointer */
     padding: 0; /* Remove padding */
     margin-right: 10px; /* Space between the button and the logo */
-    cursor: pointer;
 }
 
 

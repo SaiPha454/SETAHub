@@ -25,5 +25,15 @@
     padding-top: 21px;
     padding-right: 21px;
     padding-left: 21px;
-    
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.messagesContainer::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .messagesContainer {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }

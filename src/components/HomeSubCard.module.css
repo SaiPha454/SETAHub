@@ -1,8 +1,6 @@
 
-
-
 .photoContainer {
-    height: 120px;
+    height: 150px;
     width: 96px;
     box-shadow: 0px 4px 4px 4px rgba(58, 55, 55, 0.25);
     margin: 10px;
@@ -11,29 +9,63 @@
     display: inline-block;
     background-color: #fbfbfb;
     align-content: center;
-    padding: 20px;
+    padding: 15px;
     overflow: hidden;
     border-radius: 5px;
     text-align: center;
     transition: transform 0.5s;
 }
 
-.subPhoto { 
-    width: 90%;
-    height: 90%;
+.elementsGp{
+    /* width: 90%; */
+    height: 120%;
     object-fit: contain;
 }
 
+.subPhoto { 
+    margin-top: 0;
+    width: 80%;
+    height: 40%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    font-size: 0.55rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.description {
+    margin-top: 0.2rem;
+    display: flex;
+    align-items: center;
+    font-size: 0.5rem;
+}
+
 .photoContainer:hover{
-    transform: scale(1.2);
+    transform: scale(1.15);
 }
 
 
 /* Laptops */
 @media only screen and (min-width: 960px) {
     .photoContainer {
-        width: 145px;
-        height: 145px;
+        width: 175px;
+        height: 250px;
+    }
+
+    .title {
+        font-size: 0.95rem;
+    }
+
+    .description {
+        font-size: 0.7rem;
     }
 
 }

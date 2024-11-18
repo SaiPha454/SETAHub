@@ -1,0 +1,145 @@
+.calendarWrapper {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.timeTitle {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1rem;
+    margin-top: 2rem;
+}
+
+
+.timeSlot {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.TimeBox {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid blue;
+    border-radius: 0.2rem;
+    height: 35px;
+}
+
+.startBox {
+    width: 50%;
+    border-right: 1px solid #0056d2;
+    display: flex;
+    justify-content: center;
+    padding: 0.2rem;
+
+}
+
+.endBox {
+    display: flex;
+    justify-content: center;
+    padding: 0.2rem;
+
+}
+
+.addBtn {
+    width: fit-content;
+    background-color: #0056d2;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+.slotContainer {
+    margin-top: 1.5rem;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    padding-bottom: 56px;
+}
+
+.btnWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.cancleBtn {
+    width: fit-content;
+    background-color: white;
+    color: black;
+    padding: 0.5rem 2rem;
+    border-radius: 0.375rem;
+    border: 1px solid black;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 2rem;
+}
+
+.confirmBtn {
+    width: fit-content;
+    background-color: #FFA500;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.customCalendar {
+    width: 300px;
+}
+
+/* Error Message */
+.errorMessage {
+    color: #ff0000;
+    font-size: 14px;
+    margin: 8px 0;
+    text-align: center;
+}
+
+@media only screen and (min-width: 768px) {
+    .customCalendar {
+        width: 350px;
+    }
+    .calendarWrapper {
+        margin-top: 1rem;
+    }
+
+    .timeSlot {
+        margin-top: 1rem;
+    }
+
+    .TimeBox{
+        margin-bottom: 0.5rem;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .customCalendar {
+        width: 350px;
+    }
+
+    .calendarWrapper {
+        margin-top: 1rem;
+    }
+
+    .timeSlot {
+        margin-top: 1rem;
+
+    }
+    .TimeBox{
+        margin-bottom: 0.5rem;
+    }
+}

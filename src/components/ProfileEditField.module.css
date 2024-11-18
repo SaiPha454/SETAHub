@@ -1,0 +1,74 @@
+.profileField {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .profileField label {
+    display: flex;
+    color: #333;
+    font-weight: bold;
+    width: 280px;
+    text-transform: capitalize;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  
+  .profileField input {
+    display: flex;
+    align-items: center;
+    width: 240px;
+    padding: 8px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .profileField input[readonly] {
+    color: #666;
+  }
+  
+  .inputWrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .profileField input:focus {
+    outline: 2px solid #4A90E2;
+    background-color: #fff;
+  }
+  
+  .editIcon {
+    font-size: 16px;
+    color: #888;
+    cursor: pointer;
+    margin-top: 5px;
+  }
+  
+  @media only screen and (min-width: 786px) {
+    .profileField label {
+      width: 340px;
+    }
+    .profileField input {
+      width: 300px;
+    }
+  }
+
+  .errorMessage {
+    color: #dc2626;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    align-content: start;
+  }
+  
+  .error input {
+    border-color: #ef4444;
+  }
+  
+  .required {
+    color: #dc2626;
+    margin-left: 0.25rem;
+  }

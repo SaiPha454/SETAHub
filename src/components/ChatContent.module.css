@@ -1,98 +1,60 @@
-.chatContainer {
-    /* Container of the page content */
-    /* max-width: 100%; */
-    margin: auto;
-    margin-top: 0;
-    width: 100%;
-    position: relative; /* Set relative to position children correctly */
+.senderName {
+    font-size: 13px;
+    font-family: Inter;
+    color: rgba(87, 84, 84, 0.62);
+    text-align: left;
+    display: block;
+    margin-bottom: 5px;
 }
 
-.footerContent{
+.senderBox {
+    padding: 10px;
+    max-width: 40%;
+    border-radius: 0px 12px 12px 12px;
+    background-color: rgba(237, 239, 242, 0.75);
+    min-height: 26px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 16px;
+    color: #000;
+    font-family: Inter;
+    margin-left: 10px;
+}
+
+.profileAndMsgBox {
     display: flex;
-    justify-content: space-between;
-}
-.chatFooter {
-
-    width: 100%;
-    border-radius: 10px 10px 0px 0px;
-    background-color: #d6d7da;
-    height: 62px;
-    box-sizing: border-box;
-    padding: 15px;
-    align-items: center;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
+    align-items: flex-start;
+    text-align: left;
 }
 
-.imgIcon {
-    width: 30px;
-    height: 30px;
-    margin-right: 5px;
-    cursor: pointer;
+.meBox {
+    padding: 10px;
+    max-width: 40%;
+    border-radius: 12px 0px 12px 12px;
+    background-color: #3071ff;
+    min-height: 26px;
+    overflow: hidden;
+    text-align: left;
+    font-size: 16px;
+    color: #000;
+    font-family: Inter;
+    margin-left: 10px;
+    color: white;
+
 }
 
-.input_chat {
-    height: 25px;
-    width: 250px;
-    border-radius: 7px;
-    flex:1;
-    padding: 6px;
-    border: none;
-}
-
-.send_Btn {
-    border: none;
-    background: none;
-    padding: 0;
+.senderColumn, .meColumn {
     display: flex;
-}
-
-.send_img {
-    width: 35px;
-    height: 40px;
-    justify-content: center;
-}
-
-.inputContainer {
-    display: flex;
-    box-sizing: border-box;
-    padding-right: 11px;
     flex: 1;
-    align-items: center;
+    padding: 10px;
+    overflow-y: auto;
 }
 
-@media only screen and (min-width: 768px) {
-    .chatContainer {
-        max-width: 720px;
-    }
-    .chatFooter {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-    .input_chat {
-        width: 450px;
-    }
-
-    .inputContainer {
-        padding-right: 32px;
-    }
+.meColumn {
+    justify-content: flex-end;
 }
 
-@media only screen and (min-width: 960px) {
-    .chatContainer {
-        max-width: 960px; /* Increased to match larger screen widths */
-    }
-    .chatFooter {
-        padding-left: 70px;
-        padding-right: 70px;
-    } 
-    .input_chat {
-        width: 700px;
-    }
+.senderColumn {
+    flex-direction: column;
 }
-
-
-
 

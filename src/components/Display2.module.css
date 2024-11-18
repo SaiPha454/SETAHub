@@ -1,0 +1,29 @@
+.container{
+    padding-top: 120px;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+}
+
+.image{ 
+    width: 100%;
+}
+
+.title {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+@media only screen and (min-width: 768px) {
+    .title {
+        font-size: 18px;
+    }
+
+}
+
+@media only screen and (min-width: 960px) {
+    .title {
+        font-size: 20px;
+    }
+
+}

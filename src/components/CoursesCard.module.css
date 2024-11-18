@@ -1,0 +1,168 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    height: auto;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    margin-bottom: 2rem;
+    padding-top: 0.5rem;
+    padding: 1rem;
+    flex: 0 1 350px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.remove {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+.remove:hover {
+    transform: scale(1.5)
+}
+
+.crossWrapper {
+    display:flex;
+    justify-content: end;
+    margin-bottom: 0.5rem;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nameTitle {
+    display: flex;
+    width: 60%;
+    height: 55px;
+    align-items: center;
+    
+}
+
+.courseTitle {
+    font-size: 15px;
+}
+
+.courseImg {
+    width: 2.3rem;
+    margin-right: 0.8rem;
+}
+
+.button {
+    width: fit-content;
+    background-color: #0056d2;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 0.3rem;
+}
+
+.visible {
+    opacity: 1;
+}
+
+/* Modal Styles */
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* This creates the gray overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modalComponent{
+    background-color: white;
+    padding: 0.5rem;
+    width: 95%;
+    /* max-width: 500px;  */
+    position: relative;
+    border-radius: 1rem;
+    overflow-y: auto;
+    box-sizing: border-box;
+    max-height: 90vh;
+    white-space: normal;
+}
+
+.modalTWrap {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.closeBtn {
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.5rem;
+}
+
+.remove:hover {
+    transform: scale(1.5)
+}
+
+.modalTitle {
+    font-size: 1rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    width: 70%;
+    font-weight: 600;
+}
+
+@media only screen and (min-width: 768px) {
+    .cardContainer {
+        flex: 0 1 390px;
+        min-width: 390px;
+    }
+
+    .modalComponent{
+        width: 70%;
+        /* height: auto; */
+        padding: 1rem;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .cardContainer {
+        flex: 0 1 450px;
+        min-width: 450px;
+
+    }
+
+    .modalComponent {
+        width: 65%;
+        height: auto;
+        padding: 1rem;
+    }
+
+    .modalTitle {
+        font-size: 1.5rem;
+    }
+
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.modalComponent::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.modalComponent{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none; 
+}   
+

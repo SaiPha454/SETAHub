@@ -1,0 +1,91 @@
+.button{
+    margin: 20px;
+    padding: 20px;
+    background-color: #f7f4f1;
+    border-color: #ffffff;
+}
+
+.button_container{
+    text-align: center;
+    align-content: center;
+    padding-bottom: 30px;
+}
+
+.container{
+    background-color: #f7f4f1;
+    padding-top: 30px;
+}
+
+.heading{
+    text-align: center;
+    font-size: 17px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.title {
+    font-family: 'Inter', sans-serif;
+}
+
+.explain{
+    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+}
+
+.card2{
+    display: none;
+}
+
+.highlight{
+    color: #0056d2;
+}
+
+.cards{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.card {
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px; /* Adjust as needed */
+    text-align: center;
+    background-color: #f7f4f1;
+}
+
+@media only screen and (min-width: 768px) {
+    .heading {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .card{
+        width: 150px;
+    }
+
+    .arrow{
+        height: 24px;
+        width: 24px;
+    }
+
+    .card2{
+        display: flex;
+        width: 30px;
+        flex-wrap: wrap;
+        align-content: center;
+    }
+
+    .images{
+        height: 100px;
+    }
+
+    .heading {
+        font-size: 30px;
+    }
+
+
+}
