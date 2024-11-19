@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from "./Topic.module.css"
-import BookButton from "./ui/Button"
+import BookButton from "./ui/LinkButton"
 
-function Topic({img,title, tas, books}) {
+function Topic({img,title, tas, books, topic_id}) {
   return (
     <div className={`${styles.topic}`}>
       <div className={`${styles.topicContent}`}>
@@ -15,7 +15,11 @@ function Topic({img,title, tas, books}) {
             <span className={`${styles.bookText}`}>Booked : {books}</span>
         </div>
         <div className={`${styles.footer}`}>
-            <BookButton text="Book" width="50%" />
+            <BookButton
+             text="Book" 
+             classes={styles.bookButton}
+             url={`/me/topics/${topic_id}/tas?name=${title}&icon=${img}`}
+            />
         </div>
       </div>
     </div>

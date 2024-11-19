@@ -4,33 +4,28 @@
 
 .taGrid{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   padding-bottom: 20px;
 }
 
-.available {
-  margin: 20px;
+.pageLabel {
+  /* margin: 20px; */
   font-weight: 500;
-  font-size: 40px;
+  font-size: 2em;
 }
 
 .navigationBackArrowSvgrepoIcon{
-  height: 20px;
-  width: 20px;
+  height: 30px !important;
+  width: 30px !important;
+  margin-right: 35px;
 }
 
-.javaIcon{
-  display: flex;
-  align-items: center;
-  text-align: center;
-  padding-top: 10px;
-  gap: 5px;
-}
 
-.javaSvgrepoCom1Icon {
-  height: 35px;
-  width: auto;
+.topicLogo {
+  height: 35px ;
+  width: auto ;
+  margin-right: 15px;
 }
 
 .CourseName {
@@ -38,12 +33,9 @@
   font-weight: normal;
 }
 
-@media (min-width: 960px) {
-  /* .container {
-    padding: 20px; 
-  } */
+@media (min-width: 768px) {
   
-  .available {
+  .pageLabel {
     margin-top: 100px;
   }
   
@@ -56,21 +48,24 @@
     justify-items: center;
   }
 
-  .javaIcon {
+  .navigationBackContainer {
     padding-top: 30px;
+    display: block;
+    text-decoration: none;
   }
 
-  .navigationBackArrowSvgrepoIcon {
-    
-    width: 35px;
-    height: 35px;
-  }
+
 
   .CourseName {
-    
+    color: black;
   }
+}
 
-  .javaSvgrepoCom1Icon{
-    
+@media only screen and (min-width: 960px) {
+  .taGrid {
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between !important;
   }
 }

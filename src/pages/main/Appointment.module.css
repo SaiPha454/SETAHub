@@ -7,6 +7,25 @@
 
 }
 
+.calendarDate {
+    border: 1px solid white !important;
+}
+.highlightDate {
+
+    border: 1px solid white;
+    background-color: #ADEBE3 !important; /* Blue background color */
+    color: black !important; /* White text color */
+}
+
+.highlightDate:hover, .highlightDateSelected:hover {
+    border: 1px solid var(--primary-color);
+}
+
+.highlightDateSelected {
+    background-color: var(--golden-color) !important; /* Red background for selected dates */
+    color: white;
+}
+
 .icon {
     width: 24px;
     height: 24px;
@@ -44,4 +63,9 @@
     gap: 12px;
     justify-content: center;
     padding-bottom: 56px;
+}
+
+.backArrow {
+    text-decoration: none;
+    color: black;
 }

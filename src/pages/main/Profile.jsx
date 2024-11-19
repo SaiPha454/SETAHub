@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import styles from "./Profile.module.css"
 import LogOutButton  from '../../components/ui/Button'
 import ProfileAddSubjects from '../../components/ProfileAddSubjects'
@@ -68,7 +68,7 @@ export default function Profile() {
     // Validate the field
     const config = fieldConfigs[field];
     const error = config.validate(value);
-
+    console.log("Handle change")
     setErrors(prev => ({
       ...prev,
       [field]: error
@@ -76,12 +76,14 @@ export default function Profile() {
 
     // Only update if there's no error
     if (!error) {
+      
       setProfile(prev => ({
         ...prev,
         [field]: value
       }));
     }
   };
+
 
   const hasErrors = Object.values(errors).some(error => error !== "");
 

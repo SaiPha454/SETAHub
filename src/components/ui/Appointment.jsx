@@ -2,9 +2,9 @@ import React from 'react'
 import styles from "./Appointment.module.css"
 import TAProfile from "./LinkProfile"
 
-function Appointment({img, title, name, studentId, year, date, startTime, endTime, children}) {
+function Appointment({img, title, name, studentId, year, date, startTime, endTime, children, classes}) {
   return (
-    <div className={`${styles.appointment}`}>
+    <div className={`${styles.appointment} ${classes}`}>
       <img src={img} className={`${styles.titleImg}`} />
       <div className={styles.content}>
         <div className={`${styles.titleContainer}`}>

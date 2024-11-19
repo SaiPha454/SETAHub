@@ -14,3 +14,36 @@
     display: flex;
     justify-content: end;
 }
+
+.annimated {
+    position: relative; /* Important for pseudo-element positioning */
+    transition:  scale 0.3s ease, border-bottom 2s ease-in-out;
+    border: 3px solid transparent;
+}
+
+
+
+.annimated::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background-color: var(--primary-color);
+    transition: width 2s ease-in-out;
+}
+
+.annimated:hover::after {
+    width: 100%; /* Expands the border from left to right */
+}
+
+.annimated:hover {
+    cursor: pointer;
+    scale: 1.005;
+}
+
+.annimated:not(:hover)::after {
+    transition: width 0s; /* Immediately reset width when hover ends */
+    width: 0; /* Reset the width */
+}

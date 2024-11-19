@@ -1,13 +1,17 @@
 import React from 'react';
 import styles from "./AvailableTAS.module.css";
-import Box from "./Box";
-import { useParams } from 'react-router-dom';
+import TADisplay from "./TADisplay";
+import { useParams, useLocation, Link } from 'react-router-dom';
 import backArrow from '../../assets/navigation-back-arrow-svgrepo-com 1.png';
 import Java from '../../assets/java-svgrepo-com 1.png';
 import globalClasses from '../../styles/global.module.css';
 
 export default function AvailableTAS() {
   const { topicId } = useParams();
+  const query = new URLSearchParams(useLocation().search);
+
+  const topicName = query.get("name")
+  const topicIcon = query.get("icon")
 
   // Simulating TA data
   const taList = [
@@ -19,32 +23,33 @@ export default function AvailableTAS() {
 
   return (
     <div className={`${styles.container}`}>
-      <div className={`${styles.javaIcon}`}>
+      <Link to='/me' className={`${styles.navigationBackContainer}`}>
           <img
             className={`${styles.navigationBackArrowSvgrepoIcon}`}
             alt=""
             src={backArrow}
           />
           <img
-            className={`${styles.javaSvgrepoCom1Icon}`}
+            className={`${styles.topicLogo}`}
             alt=""
-            src={Java}
+            src={`${topicIcon}`}
           />
           <span className={`${styles.CourseName}`}>
-            Data Structure and Algorithms
+            {topicName}
           </span>
-      </div>
+      </Link>
 
       {/* //important */}
-      <p className={`${styles.available}`}>Available TAs</p>
+      <h4 className={`${styles.pageLabel}`}>Available TAs</h4>
 
       <div className={`${styles.taGrid}`}>
         {taList.map((ta, index) => (
-          <Box
+          <TADisplay
             key={index}
             name={ta.name}
             year={ta.year}
             id={ta.id}
+            topicId
           />
         ))}
       </div>
