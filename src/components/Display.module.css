@@ -56,6 +56,28 @@
     background-color: #f7f4f1;
 }
 
+/* Initial state (hidden) */
+.scroll-hidden {
+    opacity: 0;
+    transform: translateX(-50px); /* Adjust for the direction (left) */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Visible state (animated) */
+.scroll-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-hidden-right {
+    transform: translateX(50px);
+}
+
+.scroll-hidden-top {
+    transform: translateY(-50px);
+}
+
+
 @media only screen and (min-width: 768px) {
     .heading {
         font-size: 30px;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState, useRef } from 'react';
 import Logo from "../components/ui/Logo"
 import JoinButton from "../components/ui/LinkButton"
 import JoinButton2 from "../components/ui/LinkButton2"
@@ -16,6 +16,59 @@ import Display2 from "../components/Display2"
 
 
 export default function Home() {
+  const [isvisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    setIsVisible(true);
+  },[]);
+
+  const [show, doShow] = useState({
+    itemOne: false,
+    // homeImg: false,
+  });
+
+  const ourRef = useRef(null);
+  const imgRef = useRef(null);
+   
+  //for scroll
+  useEffect(() => {
+    const handleScroll = () => {
+        if (!imgRef.current ) return;
+
+        const imgTop = imgRef.current.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if (imgTop < windowHeight && imgTop > 0) {
+            // Image is in the viewport
+            setIsVisible(true);
+        } else {
+            // Image is out of the viewport
+            setIsVisible(false);
+        }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+}, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!ourRef.current) return;
+      const topPos = ourRef.current.getBoundingClientRect().top;
+
+      const windowHeight = window.innerHeight;
+
+      if (topPos < windowHeight) {
+        doShow((state) => ({ ...state, itemOne: true }));
+      } else {
+        doShow((state) => ({ ...state, itemOne: false }));
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className={`${styles.homeContent}`}>
       <div className={`${styles.homeCoverWrapper}`}>
@@ -37,7 +90,12 @@ export default function Home() {
             </div>
           </div>
           <div className={`${styles.homeCoverImg}`}>
-            <img src={HomeCoverImg} />
+          <img
+              src={HomeCoverImg}
+              alt="Home Cover"
+              className={isvisible ? styles.visible : ''}
+              ref={imgRef}
+          />
           </div>
         </div>
       </div>
@@ -66,9 +124,20 @@ export default function Home() {
         </div>
       </div>
 
-      <Display2 />
+      <div className={`${styles.Wrapper}`}>
+      <div
+          className={`${styles.display2} ${
+            show.itemOne ? styles.displayFadeInLeft : ''
+          }`}
+          animate={show.itemOne}
+          ref={ourRef}
+        >
+          <Display2 />
+        </div>
+      </div>
 
       </div>
     </div>
   )
 }
+

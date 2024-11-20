@@ -21,11 +21,16 @@
 
 .homeCoverImg img {
     width: 60%;
+    opacity: 0; /* Hidden initially */
+    transform: translateX(200px); /* Positioned off-screen */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
+
 .homeCoverText {
     padding-top: 16px;
     flex: 1;
 }
+
 
 /* .homeCoverText p {
     font-weight: bold;
@@ -131,6 +136,61 @@
 .photoContainer:hover{
     transform: scale(1.2);
 }
+
+
+/* animation */
+/* @keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(150px); 
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0); 
+    }
+}
+
+.imageVisible {
+    animation: fadeIn 1s ease-out; 
+    opacity: 1;
+}
+
+.imageHidden {
+    opacity: 0; 
+} */
+
+.homeCoverImg img.visible {
+    opacity: 1; /* Fully visible */
+    transform: translateX(0); /* Moves into view */
+    animation: fadeInFromRight 1s ease-out; /* Restart animation */
+}
+
+@keyframes fadeInFromRight {
+    0% {
+        opacity: 0;
+        transform: translateX(200px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInFromLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.displayFadeInLeft {
+    animation: fadeInFromLeft 1s ease-out;
+}
+
 
 
 /* ipad */
