@@ -9,3 +9,19 @@
 .content {
     padding-top: 48px;
 }
+
+.MyBookingsTitle {
+    font-size: 24px;
+}
+
+@media (min-width: 768px) {
+    .MyBookingsTitle {
+        font-size: 28px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .MyBookingsTitle {
+        font-size: 32px;
+    }
+}

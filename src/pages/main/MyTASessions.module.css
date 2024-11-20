@@ -9,3 +9,19 @@
 .content {
     padding-top: 48px;
 }
+
+.TASessionsTitle {
+    font-size: 24px;
+}
+
+@media (min-width: 768px) {
+    .TASessionTitle {
+        font-size: 28px;
+    }
+}
+
+@media only screen and (min-width: 960px) {
+    .TASessionTitle {
+        font-size: 32px;
+    }
+}

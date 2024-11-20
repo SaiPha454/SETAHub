@@ -10,6 +10,7 @@ export default function Booking() {
 
   return (
     <div className={`${styles.container}`}>
+      <h1 className={`${styles.MyBookingsTitle}`}>My Bookings with TAs</h1>
       <div className={`${styles.switch}`}>
         <SwitchTab activeTab={activeTab} setActiveTab={setActiveTab}/>
       </div>

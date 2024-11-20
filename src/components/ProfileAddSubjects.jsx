@@ -23,7 +23,7 @@ export default function AddSubjects() {
     const [newCourseImg, setNewCourseImg] = useState(null)  //for course img input
     const [selectedFileName, setSelectedFileName] = useState("Choose Course Photo")
 
-    const [error, setErrors] = useState({})
+    const [error, setErrors] = useState("")
 
 
     const fileInputRef = useRef(null);
@@ -77,11 +77,13 @@ export default function AddSubjects() {
 
     const handleOptionChange = (option) => {
         setSelectedOption(option);
+        setErrors("");
         setSelectedCourse(""); // Reset selected course when switching options
     };
 
     const handleSelectedCourse = async () => {
         if (!selectedCourse) {
+            setErrors("Please select a course");
             return; // Prevent further actions if no course is selected
         }
     
@@ -90,7 +92,7 @@ export default function AddSubjects() {
         if (course) {
             if (selectedCourses.some(c => c.id === course.id)) {
                 
-                alert("This course is already selected!"); // Show alert for duplicate
+                setErrors("This course is already selected!"); // Show alert for duplicate
             } else {
                 try {
                     // Add the course if it's not a duplicate
@@ -99,7 +101,8 @@ export default function AddSubjects() {
                         ta_id : authUser.id
                     }, {withCredentials: true})
                     console.log(response.data.data)
-                    setSelectedCourses([...selectedCourses, response.data.data]); 
+                    setSelectedCourses([...selectedCourses, response.data.data]);
+                    setErrors("")
                 } catch (error) {
                     
                 }
@@ -110,7 +113,7 @@ export default function AddSubjects() {
     
     const handleCreateCourse = async () => {
         if (!newCourseName.trim()) {
-            alert("Please provide a course name")  //Error Handalation
+            setErrors("Please provide a course name")  //Error Handalation
             return;
         }
 
@@ -119,7 +122,7 @@ export default function AddSubjects() {
         )
 
         if (courseExists) {
-            alert("Course already exists!");
+            setErrors("Course already exists!");
             return;
         }
 
@@ -144,7 +147,8 @@ export default function AddSubjects() {
             setSelectedCourses([...selectedCourses, response.data.data]);
             setCourses([...courses, response.data.data.topic])
             setNewCourseName(""); // Reset the input field
-            setNewCourseImg(null); // Reset the image input 
+            setNewCourseImg(null); // Reset the image input
+            setErrors("")
         } catch (error) {
             console.log("Error : ", error.response.data)
         }
@@ -241,10 +245,11 @@ export default function AddSubjects() {
                                 <span className={`${styles.selectCourseName}`}>{course.topic}</span>
                             </div>
                         )}
-                        className={styles.select}
+                        className={`${styles.select} ${error ? styles.errorBorder: "" }`}
                         placeholder="Select a Course"
                         classNamePrefix="react-select"   //to change the built in effect of react-select
                     />
+                    {error && <p className={styles.errorMessage}>{error}</p>}
                     <button className={styles.button} onClick={handleSelectedCourse}>
                         Add
                     </button>
@@ -255,13 +260,15 @@ export default function AddSubjects() {
                 <div className={`${styles.createForm}`}>
                     <p className={`${styles.helpText}`}>Create a new course you want to teach</p>
                     <form>
-                        <input className={`${styles.nameForm}`}
-                            type ="text" 
+                        <input 
+                            className={`${styles.nameForm} ${error ? styles.errorBorder : ""}`}                            type ="text" 
                             placeholder ="Enter New Course name"
                             value={newCourseName}
                             onChange={(e) => setNewCourseName(e.target.value)}
                             required
                         />
+                        {error && <p className={styles.errorMessage}>{error}</p>}
+
                         <div>
                             <div className={`${styles.imageInputWrapper}`} onClick={handleIconClick}>
                                 <img 

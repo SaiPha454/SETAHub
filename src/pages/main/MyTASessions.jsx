@@ -10,6 +10,7 @@ export default function MyTASessions() {
 
   return (
     <div className={`${styles.container}`}>
+      <h1 className={`${styles.TASessionsTitle}`}>My TA Sessions</h1>
       <div className={`${styles.switch}`}>
         <SwitchTab activeTab={activeTab} setActiveTab={setActiveTab}/>
       </div>
