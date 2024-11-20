@@ -4,12 +4,14 @@ import styles from "./ResetPassword.module.css"
 import FormInput from '../components/ui/FormInput'
 import SignUpButton from "../components/ui/Button"
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 
 export default function ResetPassword() {
   const [email,setEmail] = useState('');
   const [emailError, setEmailError] = useState("");
   const [touched, setTouched] = useState(false);
+  const [resetMessage , setResetMessage] = useState("")
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -42,7 +44,7 @@ export default function ResetPassword() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setTouched(true);
     
@@ -56,8 +58,18 @@ export default function ResetPassword() {
       return;
     }
     
-    // Handle password reset logic here
-    console.log('Password reset requested for:', email);
+    try {
+      
+      let response = await axios.post("http://localhost:8000/auth/reset-password", email, {
+        withCredentials:true
+      })
+      console.log(response.data)
+      setResetMessage(`Your new password was sent to ${email}. Please login with the new password ! `)
+      setEmail("")
+      
+    } catch (error) {
+      setEmailError(error.response.data.message)
+    }
   };
 
   return (
@@ -77,26 +89,24 @@ export default function ResetPassword() {
                       errorMessage={emailError}
                       name="email"
                     />
-                    {/* {emailError && (
-                      <div className={styles.errorMessage}>
-                        {emailError}
-                      </div>
-                    )} */}
+                    
                 </div> 
-                  
                 <div className={`${styles.buttonWrapper}`}>
                   <SignUpButton 
                     text="Reset" 
                     type="submit"
                     className={`${styles.resetButton}`}
+                    onClick={handleSubmit}
                   />
                 </div>
                 <div>
-                  <Link to="/">Back to Log In</Link>
+                  <Link to="/signin">Back to Log In</Link>
                 </div>
             </form>
         </div>
+        <p className={styles.resetMessage} >{resetMessage}</p>
       </div>
+      
     </div>
   ) 
 }

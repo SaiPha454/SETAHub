@@ -7,6 +7,16 @@
 
 }
 
+.success {
+    color: #4BB543;
+    font-weight: bold;
+}
+
+.error {
+    font-weight: bold;
+    color: var(--error-color);
+}
+
 .calendarDate {
     border: 1px solid white !important;
 }

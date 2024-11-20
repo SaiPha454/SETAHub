@@ -2,6 +2,14 @@
 
 }
 
+.submitError {
+    color: #dc2626;
+    font-size: 14px;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+
 .formContainer {
     padding: 16px;
     padding-top: 48px;

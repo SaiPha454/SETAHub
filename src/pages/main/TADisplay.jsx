@@ -4,7 +4,7 @@ import LinkButton from '../../components/ui/LinkButton';
 import LinkProfile from '../../components/ui/LinkProfile';
 import { useLocation } from 'react-router-dom';
 
-export default function TADisplay({ name, year, id, topicId }) {
+export default function TADisplay({ name, year, taId, topicId, bio }) {
 
   const location = useLocation()
   const path = location.pathname
@@ -16,13 +16,13 @@ export default function TADisplay({ name, year, id, topicId }) {
       
       <LinkProfile classes={`${styles.profile}`} />
       <div className={`${styles.TAName}`}>{name}</div>
-      <div className={`${styles.year}`}> ( {year} )</div>
+      <div className={`${styles.year}`}> ( Year - {year} )</div>
       <div className={`${styles.aBrightSocially}`}>
-        A bright, socially intelligent who effortlessly connects with others, blending wit with empathy in every interaction.
+        {bio}
       </div>
       <div className={`${styles.buttonContainer}`}>
         <LinkButton 
-        url={`/me/topics/${topicId}/tas/${id}/booking?ta_name=${name}&from=${encodeURIComponent(current_url)}`}
+        url={`/me/topics/${topicId}/tas/${taId}/booking?ta_name=${name}&from=${encodeURIComponent(current_url)}`}
         classes={`${styles.button}`}
         text={"See Available Timeslots"} />
       </div>

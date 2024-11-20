@@ -1,16 +1,23 @@
-import React, { useState, useRef } from 'react';   //for file input
+import React, { useState, useRef, useEffect, useContext } from 'react';   //for file input
 import styles from './ProfileAddSubjects.module.css';
 import GeneralImage from '../assets/general.png'
 import Arrow from '../assets/topicRight.svg'
 import Select from "react-select"
 import imgIcon from "../assets/img_icon.svg"
 import CoursesCard from './CoursesCard';
+import axios from 'axios';
+import { isFilePath } from '../utils/isFilePath';
+import defaultTopicIcon from "../assets/general.png"
+import { AuthContext } from '../AuthContext';
 
 export default function AddSubjects() {
 
+    const { authUser } = useContext(AuthContext)
     const [isHovered, setIsHovered] = useState(false);
     const [selectedOption, setSelectedOption] = useState("select");
+
     const [selectedCourses, setSelectedCourses] = useState([]);  // handle selctd courses array and it will show the cards of subjects
+
     const [selectedCourse, setSelectedCourse] = useState("");  //handle one select coursse
     const [newCourseName, setNewCourseName] = useState("")  //for course name input
     const [newCourseImg, setNewCourseImg] = useState(null)  //for course img input
@@ -25,27 +32,44 @@ export default function AddSubjects() {
         fileInputRef.current.click();
     }
 
-
-    const defaultCourses = [
-        {
-          img: "https://www.svgrepo.com/show/452234/java.svg",
-          title: "Data Structure and Algorithms",
-        },
-        {
-          img: "https://www.svgrepo.com/show/452234/java.svg",
-          title: "Python",
-        },
-        {
-          img: "https://www.svgrepo.com/show/452234/java.svg",
-          title: "Rust",
-        },
-        {
-          img: "https://www.svgrepo.com/show/452234/java.svg",
-          title: "General Talk",
-        }
-    ];
     
-    const [courses, setCourses] = useState(defaultCourses);  //for already Existing courses
+    const [courses, setCourses] = useState([]);  //for already Existing courses
+
+
+    useEffect(()=>{
+
+        const fetchTopics = async()=>{
+          try {
+            let response = await axios.get("http://localhost:8000/topics/?page=1&limit=1000",{
+              withCredentials: true
+            })
+            setCourses(response.data.data)
+            // setSelectedCourses(response.data.data)
+            
+          } catch (error) {
+            console.log(error)
+          }
+        }
+        fetchTopics()
+      }, [])
+
+      useEffect(()=>{
+        const fetchRegisteredTopics = async () =>{
+            
+            try {
+                console.log("hello Hi")
+                let registered_topics = await axios.get(`http://localhost:8000/users/${authUser.id}/registered-topics`, {withCredentials: true})
+                console.log("Registered : => ",registered_topics.data.data.appointments)
+                setSelectedCourses(registered_topics.data.data.appointments)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchRegisteredTopics()
+      }, [])
+
+
+
 
     const handleShowRadio = () => {
         setIsHovered(prev => !prev);
@@ -56,30 +80,42 @@ export default function AddSubjects() {
         setSelectedCourse(""); // Reset selected course when switching options
     };
 
-    const handleSelectedCourse = () => {
+    const handleSelectedCourse = async () => {
         if (!selectedCourse) {
             return; // Prevent further actions if no course is selected
         }
     
-        const course = courses.find(c => c.title === selectedCourse.title);
+        const course = courses.find(c => c.id === selectedCourse.id);
     
         if (course) {
-            if (selectedCourses.some(c => c.title === course.title)) {
+            if (selectedCourses.some(c => c.id === course.id)) {
+                
                 alert("This course is already selected!"); // Show alert for duplicate
             } else {
-                setSelectedCourses([...selectedCourses, course]); // Add the course if it's not a duplicate
+                try {
+                    // Add the course if it's not a duplicate
+                    let response = await axios.post("http://localhost:8000/appointments/",{
+                        topic_id : course.id,
+                        ta_id : authUser.id
+                    }, {withCredentials: true})
+                    console.log(response.data.data)
+                    setSelectedCourses([...selectedCourses, response.data.data]); 
+                } catch (error) {
+                    
+                }
+                
             }
         }
     };
     
-    const handleCreateCourse = () => {
+    const handleCreateCourse = async () => {
         if (!newCourseName.trim()) {
             alert("Please provide a course name")  //Error Handalation
             return;
         }
 
         const courseExists = courses.some(course => 
-            course.title.toLowerCase() === newCourseName.trim().toLowerCase()
+            course.topic.toLowerCase() === newCourseName.trim().toLowerCase()
         )
 
         if (courseExists) {
@@ -87,21 +123,46 @@ export default function AddSubjects() {
             return;
         }
 
-        const newCourse = {
-            img: newCourseImg ? URL.createObjectURL(newCourseImg) : GeneralImage,  //if not user submit the image input default image
-            title: newCourseName //passed as string
-        }
 
-        setCourses([...courses, newCourse])
-        setSelectedCourses([...selectedCourses, newCourse])
-        setNewCourseName(""); // Reset the input field
-        setNewCourseImg(null); // Reset the image input   
+        try {
+            const newCourseFormData = new FormData()
+            newCourseFormData.append("topic", newCourseName)
+            newCourseFormData.append("img", newCourseImg)
+            let response = await axios.post("http://localhost:8000/topics/", newCourseFormData, {
+                headers: {
+                  "Content-Type": "multipart/form-data",
+                },
+                withCredentials: true
+              });
+            console.log("created course : ", response.data)
+
+            response = await axios.post("http://localhost:8000/appointments/",{
+                topic_id : response.data.data.id,
+                ta_id : authUser.id
+            }, {withCredentials: true})
+            console.log("Created Appointment : ",response.data.data)
+            setSelectedCourses([...selectedCourses, response.data.data]);
+            setCourses([...courses, response.data.data.topic])
+            setNewCourseName(""); // Reset the input field
+            setNewCourseImg(null); // Reset the image input 
+        } catch (error) {
+            console.log("Error : ", error.response.data)
+        }
+          
     }
 
-    const handleRemoveCourse = (courseTitle) => {
-        setSelectedCourses((prevCourses) => 
-            prevCourses.filter((course) => course.title !== courseTitle)
-        );
+    const handleRemoveCourse = async (courseId) => {
+        console.log("Remove id: ", courseId)
+
+        try {
+            let response = await axios.delete(`http://localhost:8000/appointments/${courseId}`, {withCredentials: true})
+        
+            setSelectedCourses((prevCourses) => 
+                prevCourses.filter((course) => course.id !== courseId)
+            );
+        } catch (error) {
+            console.log(error.response)
+        }
     };
     
 
@@ -175,8 +236,9 @@ export default function AddSubjects() {
                         options={courses}
                         formatOptionLabel={(course) => (
                             <div className={styles.optionLabel}>
-                                <img src={course.img} alt="" className={styles.optionImage} />
-                                <span className={`${styles.selectCourseName}`}>{course.title}</span>
+                                <img src={isFilePath(course.img) ? `http://localhost:8000${course.img}` : defaultTopicIcon} 
+                                    alt="" className={styles.optionImage} />
+                                <span className={`${styles.selectCourseName}`}>{course.topic}</span>
                             </div>
                         )}
                         className={styles.select}
@@ -238,9 +300,9 @@ export default function AddSubjects() {
                 {selectedCourses.map((course, index) => (
                     <CoursesCard 
                         key={index} 
-                        img={course.img} 
-                        title={course.title}
-                        onRemove={() => handleRemoveCourse(course.title)}
+                        img={ isFilePath(course.topic.img) ? `http://localhost:8000${course.topic.img}` : defaultTopicIcon }
+                        title={course.topic.topic}
+                        onRemove={() => handleRemoveCourse(course.id)}
                     />
                 ))}
             </div>

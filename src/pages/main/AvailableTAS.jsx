@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from "./AvailableTAS.module.css";
 import TADisplay from "./TADisplay";
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams, useLocation, Link  } from 'react-router-dom';
 import backArrow from '../../assets/navigation-back-arrow-svgrepo-com 1.png';
 import Java from '../../assets/java-svgrepo-com 1.png';
 import globalClasses from '../../styles/global.module.css';
+import axios from 'axios';
+
 
 export default function AvailableTAS() {
   const { topicId } = useParams();
@@ -14,12 +16,36 @@ export default function AvailableTAS() {
   const topicIcon = query.get("icon")
 
   // Simulating TA data
-  const taList = [
-    { name: 'Username', year: 'Year 2', id: '66011533' },
-    { name: 'Username', year: 'Year 2', id: '66011533' },
-    { name: 'Username', year: 'Year 2', id: '66011534' },
-    { name: 'Username', year: 'Year 2', id: '66011535' },
-  ];
+  // const taList = [
+  //   { name: 'Username', year: 'Year 2', id: '66011533' },
+  //   { name: 'Username', year: 'Year 2', id: '66011533' },
+  //   { name: 'Username', year: 'Year 2', id: '66011534' },
+  //   { name: 'Username', year: 'Year 2', id: '66011535' },
+  // ];
+
+  const [ taList, setTAList ]  = useState([])
+  
+  useEffect(()=>{
+
+    
+    const fetchTas= async () => {
+
+      try {
+        let response = await axios.get(`http://localhost:8000/topics/${topicId}`, {
+          withCredentials: true
+        })
+        let data = response.data.appointments
+        setTAList(data)
+
+      } catch (error) {
+        console.log("Error : ", error)
+      }
+    }
+
+    fetchTas()
+  }, [])
+
+  console.log(taList)
 
   return (
     <div className={`${styles.container}`}>
@@ -46,10 +72,11 @@ export default function AvailableTAS() {
         {taList.map((ta, index) => (
           <TADisplay
             key={index}
-            name={ta.name}
-            year={ta.year}
-            id={ta.id}
-            topicId
+            name={ta.ta.name}
+            year={ta.ta.year}
+            taId={ta.ta.id}
+            topicId = {topicId}
+            bio={""}
           />
         ))}
       </div>

@@ -27,7 +27,7 @@ export default function CoursesCard({img, title, onRemove}) {
                 <div className={`${styles.cardContent}`}>
                     <div className={`${styles.nameTitle}`}>
                         <img src={img} className={`${styles.courseImg}`} alt="course Img" />
-                        <p className={`${styles.courseTitle}`}>{title}</p>
+                        <p className={`${styles.courseTitle}`}> Course - {title}</p>
                     </div>
                     <button className={styles.button} onClick={openModal}>
                         Edit Availability

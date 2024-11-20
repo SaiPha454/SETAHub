@@ -33,7 +33,9 @@
     border-radius: 12px 0px 12px 12px;
     background-color: #3071ff;
     min-height: 26px;
-    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
     text-align: left;
     font-size: 16px;
     color: #000;

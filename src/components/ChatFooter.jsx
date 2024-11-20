@@ -3,8 +3,8 @@ import styles from './ChatFooter.module.css'; // Create a CSS file for styling i
 import sendBtn from '../assets/chatSendBtn.svg'
 import imgIcon from '../assets/img_icon.svg'
 import globalStyles from "../styles/global.module.css"
-
-const ChatFooter = ({onSendMessage, onSendImage}) => {
+import TypingIndicator from './ui/TypingIndicator';
+const ChatFooter = ({onSendMessage, onSendImage, onTyping = ()=>{}}) => {
     const [message, setMessage] = useState(''); //to change the msg
 
     const fileInputRef = useRef(null); // Create a reference for the file input
@@ -26,11 +26,18 @@ const ChatFooter = ({onSendMessage, onSendImage}) => {
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            const imageUrl = URL.createObjectURL(file);
-             onSendImage(imageUrl);
+            console.log(file)
+            // const imageUrl = URL.createObjectURL(file);
+             onSendImage(file);
         }
         fileInputRef.current.value=null;
 
+    }
+
+    const onMessageChange = (e) => {
+        setMessage(e.target.value)
+        onTyping()
+        
     }
   
     return (
@@ -38,7 +45,7 @@ const ChatFooter = ({onSendMessage, onSendImage}) => {
 
             <div className={`${styles.chatFooter} `}>
                 <div className={`${globalStyles.container} ${styles.footerContent}`}>
-                    
+                
                     <div className={`${styles.inputContainer}`}>
                         <div>
                             <img 
@@ -59,7 +66,7 @@ const ChatFooter = ({onSendMessage, onSendImage}) => {
                         <input className={`${styles.input_chat}`}
                             type="text"
                             placeholder="Enter your message ..."
-                            onChange={(e) => setMessage(e.target.value)}
+                            onChange={onMessageChange }
                             value={message} />
                     </div>
 

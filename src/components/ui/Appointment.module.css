@@ -71,6 +71,7 @@
     height: 110px;
     align-items: start;
     margin-top: 24px;
+    align-items: flex-end;
 }
 
 .statusContainer {

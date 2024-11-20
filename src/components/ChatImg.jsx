@@ -4,8 +4,8 @@ import LinkProfile from './ui/LinkProfile'
 
 export default function ChatImg({img=null, msgImg, msgT, name, onLoad}) {
   //for individual image load
-  const [imageLoaded, setImageLoaded] = useState(0);
-  const [isModalOpen, setIsModalOpen] = useState(0);    //for image bigger and clear modal
+  const [imageLoaded, setImageLoaded] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(null);    //for image bigger and clear modal
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -18,7 +18,7 @@ export default function ChatImg({img=null, msgImg, msgT, name, onLoad}) {
 
   return (
     <div>
-      {msgT === "sender" ? (
+      {msgT === "received" ? (
         <div className={`${styles.senderColumn}`}>
           <span className={`${styles.senderName}`}>{name}</span>
           <div className={`${styles.imgContainer}`}>

@@ -15,13 +15,18 @@ import Bookings from "./pages/main/Bookings"
 import Profile from "./pages/main/Profile"
 import MyTASessions from "./pages/main/MyTASessions"
 import ChatPage from "./pages/main/ChatPage"
+import ProtectedRoute from "./ProtectedRoute"
+import AuthProtectedRoute from "./AuthProtectedRoute"
+
+
 
 export default function appRouter() {
+
 
   const router = createBrowserRouter([
     {
       path:"/",
-      element: <AuthLayout/>,
+      element: <AuthProtectedRoute><AuthLayout/></AuthProtectedRoute>,
       children:[
         {
           path:"",
@@ -43,15 +48,11 @@ export default function appRouter() {
     },
     {
       path:"/me",
-      element: <MainLayout/>,
+      element: <ProtectedRoute><MainLayout/></ProtectedRoute>,
       children:[
         {
           path:"",
           element: <Dashboard/>
-        },
-        {
-          path:"topics",
-          element: <h1>Topics</h1>
         },
         {
           path:"topics/:topicId/tas",

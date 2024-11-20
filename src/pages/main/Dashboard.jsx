@@ -1,32 +1,42 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect } from 'react'
 import Topic from '../../components/Topic'
 import styles from "./Dashboard.module.css"
-import java from "../../assets/demo/java.svg"
+import defaultTopicIcon from "../../assets/general.png"
 import searchIcon from "../../assets/searchIcon.svg"
+import axios from 'axios'
+import { isFilePath } from '../../utils/isFilePath'
 
 
 export default function Dashboard() {
 
-  // Topics Data
-  const topics = [
-    { img: java, tas: 0, books: 0, title: 'Data Structure and Algorithms' },
-    { img: java, tas: 10, books: 10, title: 'Java' },
-    { img: java, tas: 10, books: 10, title: 'Python' },
-    { img: java, tas: 10, books: 10, title: 'Rust' },
-    { img: java, tas: 10, books: 10, title: 'General Talk' },
-    { img: java, tas: 10, books: 10, title: 'General Talk' },
-
-
-  ];
-
+  const [topics, setTopics] = useState([])
   const [search,setSearch] = useState('');
   const [filterTopics, setFilterTopics] = useState(topics);
+  
 
+  useEffect(()=>{
+
+    const fetchTopics = async()=>{
+      try {
+        let response = await axios.get("http://localhost:8000/topics/?page=1&limit=100",{
+          withCredentials: true
+        })
+        setTopics(response.data.data)
+      } catch (error) {
+        
+      }
+    }
+    fetchTopics()
+  }, [])
+
+  useEffect(()=>{
+    setFilterTopics(topics)
+  },[topics])
   const handleSearch = (e) => {
     const query = e.target.value.toLowerCase();
     setSearch(query);
 
-    const filtered = topics.filter(topic => topic.title.toLowerCase().includes(query));
+    const filtered = topics.filter(topic => topic.topic.toLowerCase().includes(query));
     setFilterTopics(filtered);
   }
 
@@ -36,7 +46,6 @@ export default function Dashboard() {
 
     const filtered = topics.filter(topic => topic.title.toLowerCase().includes(query));
     setFilterTopics(filtered);
-    console.log("search triggered", filtered)
   }
 
   return (
@@ -59,19 +68,19 @@ export default function Dashboard() {
       {/* Topics List */}
         <div className={`${styles.container}`}>
           {filterTopics.map((topic, index) => (
+            
             <Topic
               key={index}
-              img={topic.img}
+              img={ isFilePath(topic.img ) ? `http://localhost:8000${topic.img}` : defaultTopicIcon}
               tas={topic.tas}
-              books={topic.books}
-              title={topic.title}
+              books={topic.booked}
+              title={topic.topic}
+              topic_id={topic.id}
             />
           ))}
         </div>
         <br /><br />
       </div>
     </>
-
-
   )
 }

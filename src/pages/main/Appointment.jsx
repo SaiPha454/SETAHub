@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import styles from "./Appointment.module.css"
 import globalStyles from "../../styles/global.module.css"
 import { useParams } from 'react-router-dom'
@@ -9,7 +9,8 @@ import 'react-calendar/dist/Calendar.css';
 import TimeSlot from '../../components/ui/TimeSlot'
 import Button from "../../components/ui/Button"
 import { formatDatefromCalendar } from '../../utils/calendar'
-
+import axios from 'axios'
+import { AuthContext } from '../../AuthContext'
 
 export default function Appointment() {
 
@@ -18,6 +19,12 @@ export default function Appointment() {
   const prev_url = query.get("from")
   const {topicId, taId} = useParams();
   const [date, setDate] = useState(new Date());
+  const { authUser } = useContext(AuthContext)
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null)
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [success, setSuccess] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(null)
+
   const [timeslots, setTimeSlots] = useState({
     "2024-11-25":[
       {start:'09:00 AM',end:'12:30 PM', selected: true},
@@ -32,13 +39,26 @@ export default function Appointment() {
       {start:'09:00 AM',end:'12:30 PM', selected: false}
     ]
   })
-  
-  let temp = [
-    {start:'09:00 AM',end:'12:30 PM', selected: true},
-    {start:'09:00 AM',end:'12:30 PM', selected: false},
-    {start:'09:00 AM',end:'12:30 PM', selected: true},
-    {start:'09:00 AM',end:'12:30 PM', selected: false}
-  ]
+
+  useEffect(()=>{
+
+    const fetchAvailableTimeSlots = async () =>{
+      
+      try {
+        let response = await axios.get(`http://localhost:8000/users/${taId}/available-timeslots?topic_id=${topicId}`, {withCredentials: true})
+        setTimeSlots(response.data.data)
+        
+      } catch (error) {
+        console.log("Error : ", error.response)
+      }
+
+    }
+
+    fetchAvailableTimeSlots()
+  }, [])
+
+  console.log(authUser)
+  useEffect(()=>console.log(timeslots),[timeslots])
   const disableOtherMonthDays = ({ date, view }) => {
     if (view === 'month') { // Only for month view
       const currentMonth = new Date().getMonth(); // Get the current month (0-indexed)
@@ -58,20 +78,7 @@ export default function Appointment() {
   };
 
 
-  // const tiltClass = ({ date, view }) => {
-  //   // Only highlight dates in month view
-  //   if (view === 'month') {
-  //     const formattedDate = formatDatefromCalendar(date);
-      
-  //     if (timeslots[formattedDate] && timeslots[formattedDate].length > 0) {
-        
-  //       return styles.highlightDate; // Apply this class to highlighted dates
-  //     }
-
-  //   }
-  //   return styles.calendarDate;
-  // };
-  const tiltClass = ({ date, view }) => {
+  const tileClassName = ({ date, view }) => {
     if (view === 'month') {
       const formattedDate = formatDatefromCalendar(date);
   
@@ -88,7 +95,21 @@ export default function Appointment() {
 
 
     const copyTimeSlots = {...timeslots}
-    copyTimeSlots[day][index].selected = !copyTimeSlots[day][index].selected
+
+    // copyTimeSlots[day][index].selected = !copyTimeSlots[day][index].selected
+
+    for(let key in copyTimeSlots) {
+        
+      copyTimeSlots[key].forEach( (slot, i) => {
+        if (key == day && i == index){
+          slot.selected = true
+          setSelectedDate(day)
+          setSelectedTimeSlot(slot)
+        }else{
+          slot.selected = false
+        }
+      });
+    }
 
     setTimeSlots(copyTimeSlots)
   }
@@ -102,19 +123,31 @@ export default function Appointment() {
     setDate(e)
   }
 
-  const onConfirmBooking = () =>{
-    
-    const selectedTimeSlots = {}
-    for (let key in timeslots){
-      let slots = timeslots[key].filter((slot)=>slot.selected)
-      if (slots.length > 0){
-        slots = slots.map((slot)=>{
-          return {from: slot.start, to: slot.end}
-        })
-        selectedTimeSlots[key]=slots
-      }
+  const onConfirmBooking = async () =>{
+
+    try {
+
+      let response = await axios.post("http://localhost:8000/bookings",{
+
+        topic_id : topicId,
+        student_id : authUser.id,
+        ta_id: taId,
+        date: selectedDate,
+        timeslot: {from: selectedTimeSlot.from, to: selectedTimeSlot.to}
+
+      }, {withCredentials: true})
+
+      setSuccess(true)
+      setErrorMessage(null)
+      setTimeout(() => {
+        setSuccess(false)
+      }, 2000);
+
+    } catch (error) {
+      console.log(error.response.data)
+      setErrorMessage(error.response.data.message)
     }
-    console.log("Confirm booking with Timeslots : ", selectedTimeSlots)
+
   }
 
   return (
@@ -135,7 +168,7 @@ export default function Appointment() {
               tileDisabled={disableOtherMonthDays}
               maxDetail="month"
               showDoubleView={false}
-              tileClassName={tiltClass}
+              tileClassName={tileClassName}
             />
           </div>
           <div className={`${styles.timeSlot}`}>
@@ -149,11 +182,13 @@ export default function Appointment() {
                   selected={tm.selected} 
                   onSelect={()=>onSelectTimeSlotHandler(formatDatefromCalendar(date),index)} 
                   key={index} 
-                  start={tm.start} end={tm.end} />
+                  start={tm.from} end={tm.to} />
                 })
               }
             </div>
             <Button onClick={onConfirmBooking} color='#FFA500' text='Confirm' />
+            {success && <p className={`${styles.success}`} >Your booking is successful !</p>}
+            { (errorMessage && !success) && <p className={`${styles.error}`} >{errorMessage}</p> }
           </div>
         </div>
       </div>

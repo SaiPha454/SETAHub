@@ -19,7 +19,7 @@ function Appointment({img, title, name, studentId, year, date, startTime, endTim
         </div>
         <div className={`${styles.dateTimeContainer}`}>
           <div className={`${styles.dateTime}`}>
-            <span>Date Time : {date}  <i className={styles.time}>{`${startTime} - ${endTime}`}</i> </span>
+            <span>Date Time : {date} <br />  <i className={styles.time}>{`${startTime} - ${endTime}`}</i> </span>
           </div>
           <div className={`${styles.statusContainer}`}>
             {children}

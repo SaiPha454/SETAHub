@@ -1,9 +1,11 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
 import globalStyles from "../styles/global.module.css";
 import styles from "./SignIn.module.css";
 import FormInput from '../components/ui/FormInput';
 import SignUpButton from "../components/ui/Button";
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../AuthContext';
+import axios from 'axios';
 
 export default function SignIn() {
   const [formData, setFormData] = useState({
@@ -20,6 +22,7 @@ export default function SignIn() {
     submit: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { authUser, setAuthUser} = useContext(AuthContext);
 
   // Validate email format
   const validateEmail = (email) => {
@@ -106,16 +109,19 @@ export default function SignIn() {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       // Your actual API call would go here
-      // const response = await loginAPI(formData);
 
+      const response = await axios.post("http://localhost:8000/auth/login", {
+        'email': formData.email,
+        'password': formData.password
+      }, {withCredentials: true})
+
+      setAuthUser(response.data.data)
       // Clear form on success
       setFormData({ email: '', password: '' });
       setTouched({ email: false, password: false });
       
-      // Handle successful login here (e.g., redirect, set auth state, etc.)
-      console.log('Login successful', formData);
-      
     } catch (error) {
+      error = error.response.data.error
       setErrors(prev => ({
         ...prev,
         submit: error.message || 'An error occurred during sign in. Please try again.'
@@ -164,6 +170,7 @@ export default function SignIn() {
               <SignUpButton 
                 text={isSubmitting ? "Signing in..." : "Log In"} 
                 disabled={isSubmitting}
+                onClick={handleSubmit}
               />
             </div>
             <div>

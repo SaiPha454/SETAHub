@@ -37,3 +37,9 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+
+
+.typingIndicatorContainer {
+    height: 25px;
+    display: flex;
+}

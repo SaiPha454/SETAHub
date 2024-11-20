@@ -1,6 +1,8 @@
 :root {
     --primary-color: #0056d2;
     --golden-color:#FFA500;
+    --success-color : #4BB543;
+    --error-color : #ff3333;
 }
 
 .container {
@@ -22,3 +24,4 @@
         max-width: 960px; /* Increased to match larger screen widths */
     }
 }
+

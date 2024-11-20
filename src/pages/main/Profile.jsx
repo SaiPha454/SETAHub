@@ -1,20 +1,21 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState, useContext} from 'react'
 import styles from "./Profile.module.css"
 import LogOutButton  from '../../components/ui/Button'
 import ProfileAddSubjects from '../../components/ProfileAddSubjects'
 import ProfileImage from '../../components/ProfileImage';
 import ProfileEditField from '../../components/ProfileEditField';
 import ProfileImg from '../../assets/profile.svg'
-
+import { AuthContext } from '../../AuthContext';
 
 export default function Profile() {
 
+  const {authUser} = useContext(AuthContext)
   const [profile, setProfile] = useState({
-    Name: "Student",
-    Email: "student@gmail.com",
-    StudentId: "66000000",
-    YearOfStudy: "2",
-    Bio: "Enter your bio"
+    Name: authUser.name,
+    Email: authUser.email,
+    StudentId: authUser.student_id,
+    YearOfStudy: authUser.year,
+    Bio: "Can you actually learn Mandarin through songs? Can you actually learn Mandarin through songs? "
   });
 
   const [errors, setErrors] = useState({});

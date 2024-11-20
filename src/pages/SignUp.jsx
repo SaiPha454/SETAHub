@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import globalStyles from "../styles/global.module.css"
 import styles from "./SignUp.module.css"
 import FormInput from '../components/ui/FormInput'
 import SignUpButton from "../components/ui/Button"
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { AuthContext } from '../AuthContext'
+
 
 export default function SignUp() {
   const [values, setValues] = useState({
@@ -29,6 +32,8 @@ export default function SignUp() {
     studentId: false,
     password: false
   });
+
+  const {authUser, setAuthUser} = useContext(AuthContext)
 
   const validateField = (name, value) => {
     switch (name) {
@@ -97,7 +102,7 @@ export default function SignUp() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
   
     // Validate all fields and collect errors
@@ -123,7 +128,24 @@ export default function SignUp() {
   
     if (!hasErrors) {
       console.log("Form submitted:", values);
-      // Add your API call or form submission logic here
+      try {
+        
+        const response = await axios.post("http://localhost:8000/auth/register", {
+          "name": values.name,
+          "email": values.email,
+          "year": values.year,
+          "student_id": values.studentId,
+          "password": values.password
+        }, {withCredentials: true})
+        console.log(response.data)
+        setAuthUser(response.data)
+      } catch (error) {
+        console.log(error.response.data)
+        setErrors(prev => ({
+          ...prev,
+          submit: error.response.data.message || 'An error occurred during creating your account. Please try again.'
+        }));
+      }
     }
   };
 
@@ -132,7 +154,12 @@ export default function SignUp() {
       <div className={`${globalStyles.container}`}>
         <div className={styles.formContainer}>
             <h3 >Create Account</h3>
-            <div onSubmit={handleSubmit} className={`${styles.formContent}`}>
+            <form onSubmit={handleSubmit} className={`${styles.formContent}`}>
+              {errors.submit && (
+                <div className={styles.submitError} role="alert">
+                  {errors.submit}
+                </div>
+              )}
                 <div>
                     <FormInput 
                       label="Full Name" 
@@ -197,12 +224,12 @@ export default function SignUp() {
                       />
                 </div>
                 <div>
-                  <SignUpButton text="Register" type="submit"/>
+                  <SignUpButton text="Register" type="submit" onClick={handleSubmit}/>
                 </div>
                 <div>
                   <span className={`${styles.toLoginText}`}>Already have account ? <Link to="/signin">Log In</Link></span>
                 </div>
-            </div>
+            </form>
         </div>
       </div>
     </div>
