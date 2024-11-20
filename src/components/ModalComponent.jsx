@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styles from "./ModalComponent.module.css";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // default styling
 import TimeInput from '../components/ui/TimeInput'
 import TATimeSlot from '../components/ui/TATimeSlot'
 import Button from "../components/ui/Button"
+import axios from "axios";
+import { AuthContext } from "../AuthContext";
+import { useEffect } from "react";
 
-function ModalComponent({closeModal}) {
+
+function ModalComponent({closeModal, courseId, topicId, taId}) {
     const [date, setDate] = useState(new Date());
     // Time Slot Choosing
     const [slots, setSlots] = useState({});
@@ -19,6 +23,31 @@ function ModalComponent({closeModal}) {
     const [endPeriod, setEndPeriod] = useState('AM');
 
     const[error, setError] = useState('');
+    const { authUser } = useContext(AuthContext)
+    const [success, setSuccess] = useState(false)
+    const [confirmError, setConfirmError] = useState(null)
+
+    useEffect(()=>{
+        const fetchAvailableTimeSlots = async () =>{
+            try {
+                let response = await axios.get(`http://localhost:8000/users/${taId}/available-timeslots?topic_id=${topicId}`,{withCredentials: true})
+                let data = response.data.data
+                for (let key in data){
+                    data[key] = data[key].map((slot)=>{
+                        return {
+                            start: slot.from,
+                            end: slot.to
+                        }
+                    })
+                }
+                setSlots(data)
+            } catch (error) {
+                
+            }
+        }
+
+        fetchAvailableTimeSlots()
+    },[])
 
     const disableOtherMonthDays = ({ date, view }) => {
         if (view === "month") {
@@ -62,13 +91,17 @@ function ModalComponent({closeModal}) {
             const endTime = `${endHour.padStart(2, "0")}:${endMinute.padStart(2, "0")} ${endPeriod}`;
 
             //selected date
+            console.log(date)
             const dayofMonth = date.getDate();
-
+            const month = date.getMonth()
+            const fullYear = date.getFullYear()
+            const formatedDate = `${fullYear}-${month}-${dayofMonth}`
+            
             setSlots(prevDaySlots => {
-                const currentDaySlots = prevDaySlots[dayofMonth] || [];
+                const currentDaySlots = prevDaySlots[formatedDate] || [];
                 return {
                     ...prevDaySlots,
-                    [dayofMonth]: [...currentDaySlots, {start: startTime, end: endTime}]
+                    [formatedDate]: [...currentDaySlots, {start: startTime, end: endTime}]
                 }
             })
 
@@ -85,22 +118,54 @@ function ModalComponent({closeModal}) {
         }
     };
 
-    const removeTimeSlot = (dayofMonth, slotIndex) => {
+    const removeTimeSlot = (date, slotIndex) => {
+
+        const dayofMonth = date.getDate();
+        const month = date.getMonth()
+        const fullYear = date.getFullYear()
+        const formatedDate = `${fullYear}-${month}-${dayofMonth}`
+
+
         setSlots(prevDaySlots => {
-            const updatedSlots = [...prevDaySlots[dayofMonth]];
+            const updatedSlots = [...prevDaySlots[formatedDate]];
             updatedSlots.splice(slotIndex,1)
 
             //if no slot left for this data, remove the date key
             if (updatedSlots.length === 0) {
-                const {[dayofMonth] : _,...rest} = prevDaySlots;
+                const {[formatedDate] : _,...rest} = prevDaySlots;
                 return rest;
             }
 
-            return {...prevDaySlots, [dayofMonth]:updatedSlots}
+            return {...prevDaySlots, [formatedDate]:updatedSlots}
         })
     }
 
-    const handleConfrim = () => {
+    const handleConfrim =async () => {
+
+        let timeslots = {}
+        for (let key in slots) {
+            timeslots[key] = slots[key].map((slot)=>{
+                return ({
+                    "from": slot.start,
+                    "to": slot.end
+                })
+            })
+        }
+
+        try {
+            let dates = Object.keys(timeslots)
+            let response = await axios.put(`http://localhost:8000/appointments/${courseId}`,{
+                date : dates,
+                timeslots: timeslots
+            }, {withCredentials: true})
+            setSuccess(true)
+            setTimeout(() => {
+                setSuccess(false)
+            }, 2000);
+        } catch (error) {
+            console.log(error.response)
+            setConfirmError(error.response.data.message)
+        }
         console.log("Data to be sent to database", slots);
     }
 
@@ -161,6 +226,18 @@ function ModalComponent({closeModal}) {
     }
     
 
+    const tileClassName = ({ date, view }) => {
+        if (view === 'month') {
+          const formattedDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+      
+          // Check if there are timeslots and if any of them are selected
+          if (slots[formattedDate] && slots[formattedDate].length > 0) {
+            return styles.highlightDate; // Highlight with a different color for dates with available slots
+          }
+        }
+        return styles.calendarDate; // Default class for other dates
+      };
+
     return (
         <div className={`${styles.calendarWrapper}`}>
             <div>
@@ -171,11 +248,12 @@ function ModalComponent({closeModal}) {
                     maxDetail="month"
                     showDoubleView={false}
                     className={`${styles.customCalendar}`}
+                    tileClassName={tileClassName}
                 />
             </div>
             <div className={`${styles.timeSlot}`}>
                 <h3 className={`${styles.timeTitle}`}>
-                    Choose Time Slots for{" "}
+                    Choose Time Slots for {" "}
                     {date.toLocaleString("default", {
                         month: "long",
                         day: "2-digit",
@@ -208,14 +286,16 @@ function ModalComponent({closeModal}) {
                 <button onClick={addTimeSlot} className={styles.addBtn}>
                     Add +
                 </button>
+                { success && <p className={styles.successMessage} > Your Available Timeslots Updated Successfully!</p>}
+                { (confirmError && !success) && <p className={styles.errorMessage} >{confirmError}</p>}
             </div>
             <div className={styles.slotContainer}>
-            {slots[date.getDate()]?.map((slot, index) => (
+            {slots[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`]?.map((slot, index) => (
                 <TATimeSlot
                     key={index}
                     start={slot.start}
                     end={slot.end}
-                    onRemove={() => removeTimeSlot(date.getDate(), index)}
+                    onRemove={() => removeTimeSlot(date, index)}
                 />
             ))}
 

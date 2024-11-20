@@ -74,7 +74,7 @@ export default function Dashboard() {
               img={ isFilePath(topic.img ) ? `http://localhost:8000${topic.img}` : defaultTopicIcon}
               tas={topic.tas}
               books={topic.booked}
-              title={topic.topic}
+              title={topic.id}
               topic_id={topic.id}
             />
           ))}

@@ -11,6 +11,11 @@
     margin-top: 2rem;
 }
 
+.highlightDate {
+
+    background-color: var(--golden-color) !important; /* Blue background color */
+    color: black !important; /* White text color */
+}
 
 .timeSlot {
     max-width: 100%;
@@ -104,6 +109,14 @@
 /* Error Message */
 .errorMessage {
     color: #ff0000;
+    font-size: 14px;
+    margin: 8px 0;
+    text-align: center;
+}
+
+.successMessage {
+
+    color: var(--success-color);
     font-size: 14px;
     margin: 8px 0;
     text-align: center;

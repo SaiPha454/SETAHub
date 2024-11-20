@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import CrossImg from '../assets/removeCross.png'
 import styles from './CoursesCard.module.css'
-import Modal from './ModalComponent'
+import EditAvailabilityModal from './ModalComponent'
 
-export default function CoursesCard({img, title, onRemove}) {
+export default function CoursesCard({img, title, onRemove, courseId, topicId, taId}) {
     const [isHover, setIsHover] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);    
 
@@ -27,7 +27,7 @@ export default function CoursesCard({img, title, onRemove}) {
                 <div className={`${styles.cardContent}`}>
                     <div className={`${styles.nameTitle}`}>
                         <img src={img} className={`${styles.courseImg}`} alt="course Img" />
-                        <p className={`${styles.courseTitle}`}> Course - {title}</p>
+                        <p className={`${styles.courseTitle}`}> {title}</p>
                     </div>
                     <button className={styles.button} onClick={openModal}>
                         Edit Availability
@@ -40,15 +40,16 @@ export default function CoursesCard({img, title, onRemove}) {
                           onClick ={(e) => e.stopPropagation()}  //to prevent clicking modal component close modal
                     >
                         <div className={`${styles.modalTWrap}`}>
-                            <p className={`${styles.modalTitle}`}>{title}</p>
+                            <p className={`${styles.modalTitle}`}> {title}</p>
                             <div className={`${styles.modalTitleWeapper}`}>
                                 <img src={CrossImg} className={`${styles.closeBtn}`} alt="crossImage" onClick={closeModal} />
                             </div>
                         </div>
-                        <Modal closeModal={closeModal}></Modal>
-
+                        <EditAvailabilityModal 
+                        topicId={topicId}
+                        taId = {taId}
+                        courseId={courseId} closeModal={closeModal}></EditAvailabilityModal>
                     </div>
-
                 </div>
             )}
 

@@ -299,10 +299,13 @@ export default function AddSubjects() {
             <div className={`${styles.courseContainer}`}>
                 {selectedCourses.map((course, index) => (
                     <CoursesCard 
+                        courseId={course.id}
                         key={index} 
                         img={ isFilePath(course.topic.img) ? `http://localhost:8000${course.topic.img}` : defaultTopicIcon }
                         title={course.topic.topic}
                         onRemove={() => handleRemoveCourse(course.id)}
+                        taId={authUser.id}
+                        topicId={course.topic.id}
                     />
                 ))}
             </div>
