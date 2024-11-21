@@ -93,7 +93,7 @@ function ModalComponent({closeModal, courseId, topicId, taId}) {
             //selected date
             console.log(date)
             const dayofMonth = date.getDate();
-            const month = date.getMonth()
+            const month = date.getMonth()+1
             const fullYear = date.getFullYear()
             const formatedDate = `${fullYear}-${month}-${dayofMonth}`
             
@@ -121,7 +121,7 @@ function ModalComponent({closeModal, courseId, topicId, taId}) {
     const removeTimeSlot = (date, slotIndex) => {
 
         const dayofMonth = date.getDate();
-        const month = date.getMonth()
+        const month = date.getMonth()+1
         const fullYear = date.getFullYear()
         const formatedDate = `${fullYear}-${month}-${dayofMonth}`
 
@@ -228,8 +228,8 @@ function ModalComponent({closeModal, courseId, topicId, taId}) {
 
     const tileClassName = ({ date, view }) => {
         if (view === 'month') {
-          const formattedDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-      
+          const formattedDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+            console.log(formattedDate)
           // Check if there are timeslots and if any of them are selected
           if (slots[formattedDate] && slots[formattedDate].length > 0) {
             return styles.highlightDate; // Highlight with a different color for dates with available slots
@@ -290,7 +290,7 @@ function ModalComponent({closeModal, courseId, topicId, taId}) {
                 { (confirmError && !success) && <p className={styles.errorMessage} >{confirmError}</p>}
             </div>
             <div className={styles.slotContainer}>
-            {slots[`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`]?.map((slot, index) => (
+            {slots[`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`]?.map((slot, index) => (
                 <TATimeSlot
                     key={index}
                     start={slot.start}

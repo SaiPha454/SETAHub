@@ -6,22 +6,23 @@ import ProfileImage from '../../components/ProfileImage';
 import ProfileEditField from '../../components/ProfileEditField';
 import ProfileImg from '../../assets/profile.svg'
 import { AuthContext } from '../../AuthContext';
+import axios from 'axios';
 
 export default function Profile() {
 
-  const {authUser} = useContext(AuthContext)
+  const {authUser, setAuthUser} = useContext(AuthContext)
   const [profile, setProfile] = useState({
-    Name: authUser.name,
-    Email: authUser.email,
-    StudentId: authUser.student_id,
-    YearOfStudy: authUser.year,
-    Bio: "Can you actually learn Mandarin through songs? Can you actually learn Mandarin through songs? "
+    name: authUser.name,
+    email: authUser.email,
+    student_id: authUser.student_id,
+    year: authUser.year,
+    userbio: "Can you actually learn Mandarin through songs? Can you actually learn Mandarin through songs? "
   });
 
   const [errors, setErrors] = useState({});
 
   const fieldConfigs = {
-    Name: { 
+    name: { 
       required: true, 
       type: "text",
       validate: (value) => {
@@ -30,7 +31,7 @@ export default function Profile() {
         return "";
       }
     },
-    Email: { 
+    email: { 
       required: true, 
       type: "email",
       validate: (value) => {
@@ -38,7 +39,7 @@ export default function Profile() {
         return "";
       }
     },
-    StudentId: { 
+    student_id: { 
       required: true, 
       type: "text",
       validate: (value) => {
@@ -46,7 +47,7 @@ export default function Profile() {
         return "";
       }
     },
-    YearOfStudy: { 
+    year: { 
       required: true, 
       type: "number",
       validate: (value) => {
@@ -55,7 +56,7 @@ export default function Profile() {
         return "";
       }
     },
-    Bio: { 
+    userbio: { 
       required: false, 
       type: "text",
       validate: (value) => {
@@ -85,18 +86,28 @@ export default function Profile() {
     }
   };
 
+  const onLogout = async () =>{
+    try {
+      let response = await axios.post('http://localhost:8000/users/logout', {}, {withCredentials: true})
+      setAuthUser(null)
+    } catch (error) {
+      
+    }
+  }
 
   const hasErrors = Object.values(errors).some(error => error !== "");
 
   return (
     <div className={`${styles.profile}`}>
       <div className={`${styles.logout}`}>
-        <LogOutButton text="Log Out" color='#E33B3B'  />
+        <LogOutButton onClick={onLogout} text="Log Out" color='#E33B3B'  />
       </div>
 
       <ProfileImage
-        initialImage={ProfileImg}
-        onImageChange={(newImage) => console.log('Image changed:', newImage)}
+        initialImage={`http://localhost:8000${authUser.image}`}
+        userId = {authUser.id}
+        setAuthUser={setAuthUser}
+        // onImageChange={(newImage) => console.log('Image changed:', newImage)}
       />
 
       {hasErrors && (
@@ -115,6 +126,8 @@ export default function Profile() {
             required={fieldConfigs[field].required}
             error={errors[field]}
             onChange={(newValue) => handleProfileChange(field, newValue)}
+            userId = {authUser.id}
+            setAuthUser = {setAuthUser}
           />
         ))}
       </div>

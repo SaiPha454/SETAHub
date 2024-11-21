@@ -138,7 +138,14 @@ export default function SignUp() {
           "password": values.password
         }, {withCredentials: true})
         console.log(response.data)
-        setAuthUser(response.data)
+
+        const login = await axios.post("http://localhost:8000/auth/login", {
+          'email': values.email,
+          'password': values.password
+        }, {withCredentials: true})
+
+
+        setAuthUser(login.data.data)
       } catch (error) {
         console.log(error.response.data)
         setErrors(prev => ({

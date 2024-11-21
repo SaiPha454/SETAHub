@@ -5,7 +5,15 @@
     margin-bottom: 15px;
 }
 
-
+.textarea_wrap {
+  width: 250px; /* Set desired width */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap; /* Ensures wrapping */
+  height: 75px;
+  border: 0.5px solid gray !important;
+  resize: none;
+}
 .profileInput {
 
   border: none;
@@ -68,6 +76,10 @@
     }
     .profileField input {
       width: 300px;
+    }
+
+    .textarea_wrap {
+      width: 300px !important;
     }
   }
 

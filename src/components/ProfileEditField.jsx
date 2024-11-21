@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ProfileEditField.module.css';
+import axios from 'axios';
 
 const ProfileEditField = ({ 
     label, 
@@ -7,7 +8,9 @@ const ProfileEditField = ({
     onChange, 
     type = "text",
     required = false,
-    error
+    error,
+    userId,
+    setAuthUser
   }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [fieldValue, setFieldValue] = useState(value);
@@ -26,13 +29,23 @@ const ProfileEditField = ({
       }
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
       if (!error) {
         setIsEditing(false);
         if (onChange && valueChange) {
-          console.log("New  value tosubmit :", fieldValue)
-          setValueChange(false)
-          onChange(fieldValue);
+          try {
+            console.log("New  value tosubmit :", fieldValue, " with field : ", label)
+            // Save here
+            let response = await axios.put(`http://localhost:8000/users/${userId}`,{
+              [label]: fieldValue
+            }, {withCredentials: true})
+            
+            setValueChange(false)
+            onChange(fieldValue);
+            setAuthUser(response.data.data)
+          } catch (error) {
+            
+          }
         }
       }
     };
@@ -45,13 +58,25 @@ const ProfileEditField = ({
         </label>
         
         <div className={`${styles.inputWrapper} ${error ? styles.error : ''}`}>
-          <input
+          { label != "userbio" ? <input
             type={type}
             value={fieldValue || ''}
             onChange={handleChange}
             readOnly={!isEditing}
             className={`${!isEditing ? styles.readOnly : `${styles.editingInput} active`} ${styles.profileInput} `}
+          /> : 
+          <textarea
+            maxLength={100}
+            // rows={4}
+            // cols={30}
+            // style={{height: "25px"}}
+            type={type}
+            value={fieldValue || ''}
+            onChange={handleChange}
+            readOnly={!isEditing}
+            className={`${!isEditing ? styles.readOnly : `${styles.editingInput} active`} ${styles.profileInput}  ${styles.textarea_wrap}`}
           />
+          }
           <div
             className={styles.editIcon}
             onClick={() => isEditing ? handleSave() : setIsEditing(true)}

@@ -97,9 +97,10 @@ export default function ChatPage() {
                 timestamp : event.data.timestamp
               }
   
-              if (event.data.type == "image") {
+              if (isValidImageUrl(event.data.message)) {
                 messageData.isImage = true
-                messageData.img_src = event.data.message 
+                messageData.img_src = event.data.message
+                messageData.message = event.data.message
               }
               
               setMessages(prevMessages => [...prevMessages, messageData])
@@ -241,6 +242,7 @@ export default function ChatPage() {
               messages.map((msg, index) => (
                 msg.isImage ? 
                 <ChatImg
+                // img={}
                   key={index}
                   msgImg={msg.img_src} 
                   name={msg.name} 

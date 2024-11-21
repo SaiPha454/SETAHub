@@ -12,7 +12,7 @@ export default function UpcomingBooking() {
 
     const { authUser } = useContext(AuthContext)
     const [bookings, setBookings] = useState([])
-
+    const [refresh ,setRefresh] = useState(false)
     useEffect(()=>{
 
         const fetchUpcomingBookings = async () =>{
@@ -27,7 +27,16 @@ export default function UpcomingBooking() {
         }
 
         fetchUpcomingBookings()
-    }, [])
+    }, [refresh])
+
+  const onCancelBooking = async (id) =>{
+    try {
+      let response = await axios.delete(`http://localhost:8000/bookings/${id}`, {withCredentials: true})
+      setRefresh(!refresh)
+    } catch (error) {
+      console.log(error.response)
+    }
+  }
   return (
     <div className={`${styles.container}`}>
       <div className={`${styles.content}`}>
@@ -45,7 +54,7 @@ export default function UpcomingBooking() {
                 title={booking.topic.topic}
                 classes={styles.annimated}
                 >
-                    <CancelButton text="cancel" color='#E33B3B' />
+                    <CancelButton text="cancel" color='#E33B3B' onClick={()=>onCancelBooking(booking.id)}  />
                     <MessageButton text="Message" url={`/me/chat/${booking.ta.id}?peer_name=${booking.ta.name}`} />
 
                 </Appointment>

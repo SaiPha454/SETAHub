@@ -61,6 +61,7 @@ export default function AddSubjects() {
                 let registered_topics = await axios.get(`http://localhost:8000/users/${authUser.id}/registered-topics`, {withCredentials: true})
                 console.log("Registered : => ",registered_topics.data.data.appointments)
                 setSelectedCourses(registered_topics.data.data.appointments)
+                
             } catch (error) {
                 console.log(error)
             }
@@ -87,8 +88,8 @@ export default function AddSubjects() {
             return; // Prevent further actions if no course is selected
         }
     
-        const course = courses.find(c => c.id === selectedCourse.id);
-    
+        const course = selectedCourse
+        console.log("selected : ", course, " Courses : ", selectedCourses)
         if (course) {
             if (selectedCourses.some(c => c.id === course.id)) {
                 
@@ -101,10 +102,10 @@ export default function AddSubjects() {
                         ta_id : authUser.id
                     }, {withCredentials: true})
                     console.log(response.data.data)
-                    setSelectedCourses([...selectedCourses, response.data.data]);
+                    setSelectedCourses((prev)=>[...prev, response.data.data]);
                     setErrors("")
                 } catch (error) {
-                    
+                    setErrors(error.response.data.message)
                 }
                 
             }
@@ -130,7 +131,10 @@ export default function AddSubjects() {
         try {
             const newCourseFormData = new FormData()
             newCourseFormData.append("topic", newCourseName)
-            newCourseFormData.append("img", newCourseImg)
+            if(newCourseImg){
+                newCourseFormData.append("img", newCourseImg)
+            }
+            
             let response = await axios.post("http://localhost:8000/topics/", newCourseFormData, {
                 headers: {
                   "Content-Type": "multipart/form-data",
@@ -151,6 +155,7 @@ export default function AddSubjects() {
             setErrors("")
         } catch (error) {
             console.log("Error : ", error.response.data)
+            setErrors(error.response.data.message)
         }
           
     }
@@ -236,7 +241,10 @@ export default function AddSubjects() {
                     <p className={`${styles.helpText}`}>Choose a course you want to volunteer for</p>
                     <Select  //for photo display in react option
                         value={courses.find(course => course.title === selectedCourse)}
-                        onChange={(selected) => setSelectedCourse(selected)}
+                        onChange={(selected) => {
+                            console.log(selected)
+                            setSelectedCourse(selected)
+                        }}
                         options={courses}
                         formatOptionLabel={(course) => (
                             <div className={styles.optionLabel}>

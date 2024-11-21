@@ -1,28 +1,46 @@
 .profilePicture {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 20px;
-  }
-  
-  .profilePicture img {
-    display: flex;
-    justify-content: center;
-    background-color: #fff;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: solid gray 3px;
-  }
+  position: relative;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px;
+  overflow: hidden; /* Ensure overflow content is hidden */
+}
+
+
+.profileContainer {
+  /* background-color: red; */
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+.blurDiv {
+  position: absolute;
+  width: 150px;
+  height: 60px;
+  background-color: #706f6f8d;
+  bottom: -15px;
+  left: 0;
+}
+
+.profilePicture img {
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: solid gray 3px;
+  box-sizing: border-box;
+}
+
   
   .cameraIcon {
     position: absolute;
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #ffffff8d;
-    color: white;
+
     padding: 5px 70px;
     cursor: pointer;
   }
@@ -30,3 +48,6 @@
   .fileInput {
     display: none;
   }
+
+
+  

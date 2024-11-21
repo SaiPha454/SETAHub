@@ -25,20 +25,7 @@ export default function Appointment() {
   const [success, setSuccess] = useState(false)
   const [errorMessage, setErrorMessage] = useState(null)
 
-  const [timeslots, setTimeSlots] = useState({
-    "2024-11-25":[
-      {start:'09:00 AM',end:'12:30 PM', selected: true},
-      {start:'09:00 AM',end:'12:30 PM', selected: false}
-    ],
-    "2024-11-29":[
-      {start:'09:00 AM',end:'12:30 PM', selected: true},
-      {start:'09:00 AM',end:'12:30 PM', selected: false}
-    ],
-    "2024-11-19":[
-      {start:'09:00 AM',end:'12:30 PM', selected: true},
-      {start:'09:00 AM',end:'12:30 PM', selected: false}
-    ]
-  })
+  const [timeslots, setTimeSlots] = useState([])
 
   useEffect(()=>{
 
@@ -58,7 +45,8 @@ export default function Appointment() {
   }, [])
 
   console.log(authUser)
-  useEffect(()=>console.log(timeslots),[timeslots])
+  useEffect(()=>console.log("Slots :",timeslots),[timeslots])
+
   const disableOtherMonthDays = ({ date, view }) => {
     if (view === 'month') { // Only for month view
       const currentMonth = new Date().getMonth(); // Get the current month (0-indexed)
