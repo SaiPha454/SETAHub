@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# SETAHub  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+SETAHub is a platform developed to strengthen connections and mentorship within the Software Engineering Faculty at KMILT (King Mongkut's Institute of Technology Ladkrabang). The platform allows junior students to book time with senior students (Teaching Assistants, or TAs) for guidance on various academic topics. Senior students can volunteer their time to provide support, helping juniors overcome academic challenges.  
 
-## Available Scripts
+<br/><br/>
 
-In the project directory, you can run:
+![Screenshot from 2024-12-03 21-44-11](https://github.com/user-attachments/assets/9604740e-d6be-4153-b7a2-0dc48eac0b51)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<br/><br/>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features  
+1. **User Authentication and Password Reset:** Secure login and password recovery for all users.  
+2. **Booking and Appointment Management:** Schedule and manage meetings using a calendar that highlights available dates and dates with existing appointments.  
+3. **Real-Time Chatting System:** Seamless communication with support for displaying images and links automatically.  
+4. **User Profile Management:** Update and manage personal information with ease.  
 
-### `npm test`
+## Technologies Used  
+- **Core Framework:** React.js  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Styling:** CSS Modules for modular and maintainable styles  
 
-### `npm run build`
+- **React Features:**  
+  - React Hooks: `useState`, `useEffect`, `useContext`, `useMemo` for state and context management
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **React Calendar** for interactive date selection in the booking system 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Real-Time Communication:** WebSocket for real-time chatting functionality  
+- **HTTP Requests:** Axios for connecting with the backend services  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Asynchronous Programming:** Leveraging asynchronous operations for seamless user experience  
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Getting Started  
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Follow these steps to run the project on your local machine:  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites  
+Ensure you have the following installed on your system:  
+- **Node.js** (v14 or later)  
+- **npm** (Node Package Manager)  
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Installation  
 
-## Learn More
+1. Clone the repository:  
+   ```bash  
+   git clone https://github.com/SaiPha454/SETAHub.git 
+    ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Navigate to the project directory:  
+   ```bash  
+   cd SETAHub  
+    ```
+3. Install dependencies:  
+   ```bash  
+   npm install    
+    ```
+4. Start the development react server:  
+   ```bash  
+   npm run start
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Collaborators
+This project is a collaboration between the following individuals:
+- Sai Marn Pha (https://github.com/SaiPha454)
+- Eaint Kay Khaing Kyaw (https://github.com/daeunek)
+- Yanin Saema (https://github.com/NinnY23)
 
-### Code Splitting
+---
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License.
