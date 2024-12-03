@@ -1,10 +1,11 @@
 import React from 'react'
 import styles from "./Appointment.module.css"
 import TAProfile from "./LinkProfile"
+import { Link } from 'react-router-dom'
 
-function Appointment({img, title, name, studentId, year, date, startTime, endTime, children, classes}) {
+function Appointment({img, title, name, studentId, year, date, startTime, endTime, children, classes,peer_id, topic_id}) {
   return (
-    <div className={`${styles.appointment} ${classes}`}>
+    <Link className={`${styles.appointment} ${classes}`} to={`/me/chat/${peer_id}?peer_name=${name}&topic_id=${topic_id}`}>
       <img src={img} className={`${styles.titleImg}`} />
       <div className={styles.content}>
         <div className={`${styles.titleContainer}`}>
@@ -26,7 +27,7 @@ function Appointment({img, title, name, studentId, year, date, startTime, endTim
             </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 

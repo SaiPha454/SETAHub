@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from "./AvailableTAS.module.css";
 import TADisplay from "./TADisplay";
 import { useParams, useLocation, Link  } from 'react-router-dom';
@@ -6,12 +6,12 @@ import backArrow from '../../assets/navigation-back-arrow-svgrepo-com 1.png';
 import Java from '../../assets/java-svgrepo-com 1.png';
 import globalClasses from '../../styles/global.module.css';
 import axios from 'axios';
-
+import { AuthContext } from '../../AuthContext';
 
 export default function AvailableTAS() {
   const { topicId } = useParams();
   const query = new URLSearchParams(useLocation().search);
-
+  const {authUser} = useContext(AuthContext)
   const topicName = query.get("name")
   const topicIcon = query.get("icon")
 
@@ -35,6 +35,8 @@ export default function AvailableTAS() {
           withCredentials: true
         })
         let data = response.data.appointments
+        data = data.filter((element)=> element.ta_id != authUser.id)
+        console.log("ALL TA : ", data)
         setTAList(data)
 
       } catch (error) {

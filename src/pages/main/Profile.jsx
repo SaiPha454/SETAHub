@@ -16,7 +16,7 @@ export default function Profile() {
     email: authUser.email,
     student_id: authUser.student_id,
     year: authUser.year,
-    userbio: "Can you actually learn Mandarin through songs? Can you actually learn Mandarin through songs? "
+    userbio: authUser.userbio
   });
 
   const [errors, setErrors] = useState({});

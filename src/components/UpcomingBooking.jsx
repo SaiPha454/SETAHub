@@ -42,7 +42,7 @@ export default function UpcomingBooking() {
       <div className={`${styles.content}`}>
         {
             bookings.map((booking, index) =>{
-                
+                console.log(booking)
                 return <Appointment key={`${booking.topic.topic}${index}`}
                 date={booking.date}
                 startTime={booking.timeslot.from}
@@ -53,9 +53,11 @@ export default function UpcomingBooking() {
                 name={booking.ta.name}
                 title={booking.topic.topic}
                 classes={styles.annimated}
+                peer_id={booking.ta.id}
+                topic_id = {booking.topic_id}
                 >
                     <CancelButton text="cancel" color='#E33B3B' onClick={()=>onCancelBooking(booking.id)}  />
-                    <MessageButton text="Message" url={`/me/chat/${booking.ta.id}?peer_name=${booking.ta.name}`} />
+                    <MessageButton text="Message" url={`/me/chat/${booking.ta.id}?peer_name=${booking.ta.name}&topic_id=${booking.topic_id}`} />
 
                 </Appointment>
             })

@@ -40,6 +40,8 @@ export default function CompletedBooking() {
                 studentId={booking.ta.id}
                 year={booking.ta.year}
                 name={booking.ta.name}
+                peer_id={booking.ta.id}
+                topic_id={booking.topic_id}
                 title={booking.topic.topic} >
                     
                     <div className={`${styles.completed}`}>Completed</div>

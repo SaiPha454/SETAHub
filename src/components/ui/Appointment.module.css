@@ -12,8 +12,10 @@
     padding: 21px;
     width: 100%;
     box-sizing: border-box;
-    
+    text-decoration: none;
     transition:  scale 0.3s ease;
+    color: black;
+    opacity: 0.85;
 }
 
 

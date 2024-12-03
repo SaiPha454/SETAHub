@@ -113,6 +113,11 @@ export default function Appointment() {
 
   const onConfirmBooking = async () =>{
 
+    if (!selectedTimeSlot){
+
+      setErrorMessage("Please pick an available timeslots")
+      return
+    }
     try {
 
       let response = await axios.post("http://localhost:8000/bookings",{

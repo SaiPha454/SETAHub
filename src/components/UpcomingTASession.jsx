@@ -49,6 +49,8 @@ export default function UpcomingTASession() {
                 studentId={booking.student.id}
                 year={booking.student.year}
                 name={booking.student.name}
+                peer_id={booking.student.id}
+                topic_id={booking.topic_id}
                 title={booking.topic.topic} >
                     <CancelButton text="cancel" color='#E33B3B' onClick={()=>onCancelBooking(booking.id)} />
                     <MessageButton text="Message" url={`/me/chat/${booking.student.id}?peer_name=${booking.student.name}`} />

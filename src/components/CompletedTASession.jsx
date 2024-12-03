@@ -37,6 +37,8 @@ export default function CompletedTASession() {
                   studentId={booking.student.id}
                   year={booking.student.year}
                   name={booking.student.name}
+                  peer_id={booking.student.id}
+                  topic_id={booking.topic_id}
                   title={booking.topic.topic} >
                       
                       <div className={`${styles.completed}`}>Completed</div>
