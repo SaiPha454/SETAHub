@@ -8,6 +8,7 @@ import Button from "../components/ui/Button"
 import axios from "axios";
 import { AuthContext } from "../AuthContext";
 import { useEffect } from "react";
+import { formatDatefromCalendar } from "../utils/calendar";
 
 
 function ModalComponent({closeModal, courseId, topicId, taId}) {
@@ -91,11 +92,7 @@ function ModalComponent({closeModal, courseId, topicId, taId}) {
             const endTime = `${endHour.padStart(2, "0")}:${endMinute.padStart(2, "0")} ${endPeriod}`;
 
             //selected date
-            console.log(date)
-            const dayofMonth = date.getDate();
-            const month = date.getMonth()+1
-            const fullYear = date.getFullYear()
-            const formatedDate = `${fullYear}-${month}-${dayofMonth}`
+            const formatedDate = formatDatefromCalendar(date)
             
             setSlots(prevDaySlots => {
                 const currentDaySlots = prevDaySlots[formatedDate] || [];
@@ -228,7 +225,8 @@ function ModalComponent({closeModal, courseId, topicId, taId}) {
 
     const tileClassName = ({ date, view }) => {
         if (view === 'month') {
-          const formattedDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+        //   const formattedDate = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+            let formattedDate = formatDatefromCalendar(date)
             console.log(formattedDate)
           // Check if there are timeslots and if any of them are selected
           if (slots[formattedDate] && slots[formattedDate].length > 0) {
@@ -290,7 +288,7 @@ function ModalComponent({closeModal, courseId, topicId, taId}) {
                 { (confirmError && !success) && <p className={styles.errorMessage} >{confirmError}</p>}
             </div>
             <div className={styles.slotContainer}>
-            {slots[`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`]?.map((slot, index) => (
+            {slots[formatDatefromCalendar(date)]?.map((slot, index) => (
                 <TATimeSlot
                     key={index}
                     start={slot.start}

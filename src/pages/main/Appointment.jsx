@@ -69,7 +69,7 @@ export default function Appointment() {
   const tileClassName = ({ date, view }) => {
     if (view === 'month') {
       const formattedDate = formatDatefromCalendar(date);
-  
+      console.log(formattedDate)
       // Check if there are timeslots and if any of them are selected
       if (timeslots[formattedDate] && timeslots[formattedDate].some(slot => slot.selected)) {
         return styles.highlightDateSelected; // Highlight with red if any slot is selected
